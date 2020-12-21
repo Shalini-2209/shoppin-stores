@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -20,15 +20,17 @@ export default function Post() {
     };
 
     axios({
-      url: "http://localhost:3001/post/newProduct",
+      url: "http://localhost:3001/upload",
       method: "POST",
       data: payload,
     })
       .then(() => {
         console.log("Data has been sent to the server");
+        // this.resetUserInputs();
+        // this.getBlogPost();
       })
       .catch(() => {
-        console.log("Something went wrong..");
+        console.log("Internal server error");
       });
   };
 
@@ -46,6 +48,7 @@ export default function Post() {
               maxLength={20}
               onChange={(e) => setProduct({ ...product, name: e.target.value })}
             />
+
             <TextInput
               style={styles.textInput}
               placeholder="Price"
@@ -70,8 +73,9 @@ export default function Post() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 45,
+    paddingTop: 65,
     backgroundColor: "#F5FCFF",
+    justifyContent: "center",
   },
   header: {
     fontSize: 25,
