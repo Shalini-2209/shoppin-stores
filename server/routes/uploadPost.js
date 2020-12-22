@@ -1,14 +1,32 @@
 const express = require("express");
-let router = express.Router();
+const Post = require("../database/models/PostModel");
+const router = express.Router();
 
 router
-  .route("/")
+  .route("/upload")
 
   .post((req, res) => {
-    res.send("Data received successfully.");
-    res.json({
-      msg: "We received your data",
+    let data = req.body;
+    let newPost = new Post(data);
+
+    newPost.save((error) => {
+      if (error) {
+        res.send("Something went wrong in saving data");
+      } else {
+        res.send(JSON.stringify(req.body) + "Data received successfully.");
+      }
     });
   });
+
+router.route("/").get((req, res) => {
+  Post.find({})
+    .then((data) => {
+      console.log("Data: ", data);
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log("error: ", error);
+    });
+});
 
 module.exports = router;

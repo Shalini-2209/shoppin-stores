@@ -12,6 +12,19 @@ import axios from "axios";
 export default function Post() {
   const [product, setProduct] = useState({ name: "", price: "" });
 
+  const handleView = (e) => {
+    e.preventDefault();
+    axios({
+      url: "http://localhost:3001/posts/",
+    })
+      .then(() => {
+        console.log("Check out data");
+      })
+      .catch(() => {
+        console.log("Internal server error");
+      });
+  };
+
   const handleSave = (e) => {
     e.preventDefault();
     const payload = {
@@ -20,7 +33,7 @@ export default function Post() {
     };
 
     axios({
-      url: "http://localhost:3001/upload",
+      url: "http://localhost:3001/posts/upload",
       method: "POST",
       data: payload,
     })
@@ -59,6 +72,12 @@ export default function Post() {
             />
           </View>
         </ScrollView>
+      </View>
+
+      <View style={styles.inputContainer}>
+        <TouchableOpacity style={styles.saveButton} onPress={handleView}>
+          <Text style={styles.saveButtonText}>View </Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.inputContainer}>
