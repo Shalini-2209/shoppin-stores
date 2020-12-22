@@ -1,8 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-// const { getData } = require("./routes/api");
 const uploadPost = require("./routes/uploadPost");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 
 require("dotenv").config();
@@ -16,13 +14,19 @@ mongoose.connect(mongo_url, {
 });
 
 app.use(cors());
-app.use(bodyParser.json());
+
+// Data Parsing techniques
+
+// app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 db.on("error", console.error.bind(console, "connection error:"));
 db.on("connected", function () {
-  console.log("Connected successfully to server");
+  console.log("MongoDB - connected successfully..");
 });
 
+// Routes
 app.get("/", (req, res) => {
   res.send("Port is running...");
 });
@@ -30,5 +34,5 @@ app.get("/", (req, res) => {
 app.use("/posts", uploadPost);
 
 app.listen(3001, () => {
-  console.log("Running on port..no 3001");
+  console.log("Running on 3001");
 });
