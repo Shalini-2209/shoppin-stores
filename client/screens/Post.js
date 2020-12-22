@@ -10,7 +10,8 @@ import {
 import axios from "axios";
 
 export default function Post() {
-  const [product, setProduct] = useState({ name: "", price: "" });
+  const initialState = { name: "", price: "" };
+  const [product, setProduct] = useState(initialState);
 
   const handleView = (e) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ export default function Post() {
 
   const handleSave = (e) => {
     e.preventDefault();
+
     const payload = {
       name: product.name,
       price: product.price,
@@ -38,9 +40,8 @@ export default function Post() {
       data: payload,
     })
       .then(() => {
-        console.log("Data has been sent to the server");
-        // this.resetUserInputs();
-        // this.getBlogPost();
+        console.log("Added a new product.");
+        setProduct({ name: "", price: "" });
       })
       .catch(() => {
         console.log("Internal server error");
@@ -57,6 +58,7 @@ export default function Post() {
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.textInput}
+              value={product.name}
               placeholder="Your product"
               maxLength={20}
               onChange={(e) => setProduct({ ...product, name: e.target.value })}
@@ -64,6 +66,7 @@ export default function Post() {
 
             <TextInput
               style={styles.textInput}
+              value={product.price}
               placeholder="Price"
               maxLength={20}
               onChange={(e) =>
@@ -73,7 +76,6 @@ export default function Post() {
           </View>
         </ScrollView>
       </View>
-
       <View style={styles.inputContainer}>
         <TouchableOpacity style={styles.saveButton} onPress={handleView}>
           <Text style={styles.saveButtonText}>View </Text>

@@ -12,9 +12,9 @@ router
     newPost.save((error) => {
       if (error) {
         res.status(500).json({ msg: "Error appeared while saving data." });
-      } else {
-        res.send(JSON.stringify(req.body) + "Data received successfully.");
+        return;
       }
+      res.send(JSON.stringify(req.body) + "Data received successfully.");
     });
   });
 
