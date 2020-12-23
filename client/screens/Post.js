@@ -8,23 +8,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
+import Content from "./Content";
 
 export default function Post() {
   const initialState = { name: "", price: "" };
   const [product, setProduct] = useState(initialState);
-
-  const handleView = (e) => {
-    e.preventDefault();
-    axios({
-      url: "http://localhost:3001/posts/",
-    })
-      .then(() => {
-        console.log("Check out data");
-      })
-      .catch(() => {
-        console.log("Internal server error");
-      });
-  };
+  const [flag, setFlag] = useState(false);
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -77,7 +66,10 @@ export default function Post() {
         </ScrollView>
       </View>
       <View style={styles.inputContainer}>
-        <TouchableOpacity style={styles.saveButton} onPress={handleView}>
+        <TouchableOpacity
+          style={styles.saveButton}
+          onPress={() => setFlag(!flag)}
+        >
           <Text style={styles.saveButtonText}>View </Text>
         </TouchableOpacity>
       </View>
@@ -87,6 +79,8 @@ export default function Post() {
           <Text style={styles.saveButtonText}>Save</Text>
         </TouchableOpacity>
       </View>
+
+      {flag && <Content />}
     </>
   );
 }
