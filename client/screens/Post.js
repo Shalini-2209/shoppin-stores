@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import Content from "./Content";
+import { TextField } from "@material-ui/core";
 
 export default function Post() {
   const initialState = { name: "", price: "" };
@@ -45,42 +46,38 @@ export default function Post() {
         </View>
         <ScrollView>
           <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.textInput}
-              value={product.name}
-              placeholder="Your product"
+            <TextField
+              id="standard"
+              label="Product"
               maxLength={20}
+              value={product.name}
               onChange={(e) => setProduct({ ...product, name: e.target.value })}
             />
-
-            <TextInput
-              style={styles.textInput}
-              value={product.price}
-              placeholder="Price"
+            <TextField
+              id="standard-basic"
+              label="Price"
               maxLength={20}
+              value={product.price}
               onChange={(e) =>
                 setProduct({ ...product, price: e.target.value })
               }
             />
           </View>
+
+          <View style={styles.inputContainer}>
+            <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+              <Text style={styles.saveButtonText}>Save</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.saveButton}
+              onPress={() => setFlag(!flag)}
+            >
+              <Text style={styles.saveButtonText}>View </Text>
+            </TouchableOpacity>
+          </View>
+          {flag && <Content />}
         </ScrollView>
       </View>
-      <View style={styles.inputContainer}>
-        <TouchableOpacity
-          style={styles.saveButton}
-          onPress={() => setFlag(!flag)}
-        >
-          <Text style={styles.saveButtonText}>View </Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.inputContainer}>
-        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-          <Text style={styles.saveButtonText}>Save</Text>
-        </TouchableOpacity>
-      </View>
-
-      {flag && <Content />}
     </>
   );
 }
@@ -91,6 +88,7 @@ const styles = StyleSheet.create({
     paddingTop: 65,
     backgroundColor: "#F5FCFF",
     justifyContent: "center",
+    alignItems: "center",
   },
   header: {
     fontSize: 25,
@@ -100,21 +98,15 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     paddingTop: 15,
+    paddingBottom: 15,
   },
-  textInput: {
-    borderColor: "#CCCCCC",
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    height: 50,
-    fontSize: 25,
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
+
   saveButton: {
     borderWidth: 1,
     borderColor: "#007BFF",
     backgroundColor: "#007BFF",
     padding: 15,
+    alignItems: "center",
     margin: 5,
   },
   saveButtonText: {

@@ -21,7 +21,7 @@ router
 router.route("/").get((req, res) => {
   Post.find({})
     .then((data) => {
-      console.log("Data: ", data);
+      console.log("Data retrieved successfully ");
       res.json(data);
     })
     .catch((error) => {

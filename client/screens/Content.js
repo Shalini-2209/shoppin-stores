@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { View } from "react-native";
-import PostList from "./PostList";
 
 export default function Content() {
   const [content, setContent] = useState([]);
@@ -26,7 +25,7 @@ export default function Content() {
         <ul>
           {content.map((item) => (
             <li key={item.name}>
-              {item.name} {item.price}
+              {item.name} {item.price} {item.date}
             </li>
           ))}
         </ul>
