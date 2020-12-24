@@ -18,22 +18,27 @@ function MyTabs() {
       labelStyle={{ fontSize: 12 }}
     >
       <Tab.Screen
-        name="Chat"
-        component={Content}
-        options={{
-          tabBarLabel: "Chat",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="Feed"
         component={Content}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Chat"
+        component={Content}
+        options={{
+          tabBarLabel: "Chat",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="chat-processing"
+              color={color}
+              size={26}
+            />
           ),
         }}
       />

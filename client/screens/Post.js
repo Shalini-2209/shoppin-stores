@@ -42,7 +42,7 @@ export default function Post() {
     <>
       <View style={styles.container}>
         <View>
-          <Text style={styles.header}>Create Post</Text>
+          <Text style={styles.header}>New Post</Text>
         </View>
         <ScrollView>
           <View style={styles.inputContainer}>
