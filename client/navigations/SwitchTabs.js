@@ -5,6 +5,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Content from "../screens/Content";
 import Post from "../screens/Post";
+import { BottomNavigation } from "react-native-paper";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -12,10 +13,20 @@ function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
-      activeColor="#e91e63"
+      activeColor="#db7093"
+      barStyle={{ backgroundColor: "black" }}
       labelStyle={{ fontSize: 12 }}
-      style={{ backgroundColor: "tomato" }}
     >
+      <Tab.Screen
+        name="Chat"
+        component={Content}
+        options={{
+          tabBarLabel: "Chat",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Feed"
         component={Content}
@@ -40,7 +51,6 @@ function MyTabs() {
         name="Profile"
         component={Post}
         options={{
-          tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
           ),
