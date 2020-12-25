@@ -9,7 +9,9 @@ import {
 } from "react-native";
 import axios from "axios";
 import Content from "./Content";
+import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import { TextField } from "@material-ui/core";
+import ProductImg from "./ChoosePic";
 
 export default function Post() {
   const initialState = { name: "", price: "" };
@@ -64,6 +66,11 @@ export default function Post() {
             />
           </View>
 
+          <View>
+            {" "}
+            <ProductImg />
+          </View>
+
           <View style={styles.inputContainer}>
             <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
               <Text style={styles.saveButtonText}>Save</Text>
@@ -75,6 +82,7 @@ export default function Post() {
               <Text style={styles.saveButtonText}>View </Text>
             </TouchableOpacity>
           </View>
+
           {flag && <Content />}
         </ScrollView>
       </View>
