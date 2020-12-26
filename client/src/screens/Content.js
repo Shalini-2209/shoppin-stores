@@ -6,6 +6,11 @@ export default function Content() {
   const [content, setContent] = useState([]);
 
   useEffect(() => {
+    getData();
+    setTimeout(getData(), 5000);
+  }, []);
+
+  const getData = () => {
     axios({
       url: "http://localhost:3001/posts/",
     })
@@ -17,7 +22,7 @@ export default function Content() {
       .catch(() => {
         console.log("Error in retriving data..");
       });
-  }, []);
+  };
 
   return (
     <>
