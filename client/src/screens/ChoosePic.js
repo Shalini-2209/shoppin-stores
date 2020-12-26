@@ -82,15 +82,7 @@ export default function ProductImg(props) {
             <span ref={imgInputRef} value={image} id="idforSpan"></span>
           )}
         </Grid>
-        {/* {image && <Button title={image} />} */}
       </View>
-
-      {/* <Button
-          title="Pick an image from camera roll"
-          // color="#db7093"
-          color="black"
-          onPress={pickImage}
-        /> */}
     </>
   );
 }
