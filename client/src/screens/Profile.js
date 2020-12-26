@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,9 +9,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
-import Content from "./Content";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TextField, InputLabel, MenuItem, Select } from "@material-ui/core";
-import ProductImg from "./ChoosePic";
+import ProductImg from "../components/ChoosePic";
+import TopBar from "../components/TopBar";
+export const ProfileContext = React.createContext();
 
 export default function ProfileScreen() {
   const initialState = {
@@ -22,7 +24,6 @@ export default function ProfileScreen() {
     appLink: "",
   };
   const [details, setDetails] = useState(initialState);
-  const [flag, setFlag] = useState(false);
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -42,7 +43,7 @@ export default function ProfileScreen() {
     })
       .then(() => {
         console.log("New company added!");
-        setProduct(initialState);
+        setDetails(initialState);
       })
       .catch(() => {
         console.log("Internal server error");
@@ -55,10 +56,14 @@ export default function ProfileScreen() {
 
   return (
     <>
+      <View>
+        <ProfileContext.Provider value={"Create Profile"}>
+          <TopBar />
+        </ProfileContext.Provider>
+      </View>
+
       <View style={styles.container}>
-        <View>
-          <Text style={styles.header}>Create company</Text>
-        </View>
+        <MaterialCommunityIcons name="account-group" size={35} color="black" />
         <ScrollView>
           <View style={styles.inputContainer}>
             <TextField
@@ -100,9 +105,20 @@ export default function ProfileScreen() {
             <ProductImg onImgAdded={onImgAdded} />
           </View>
 
+          <TextField
+            id="standard-basic"
+            label="Application Link"
+            fullWidth
+            value={details.appLink}
+            style={styles.nextLabel}
+            onChange={(e) =>
+              setDetails({ ...details, appLink: e.target.value })
+            }
+          />
+
           <View style={styles.inputContainer}>
             <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-              <Text style={styles.saveButtonText}>Save</Text>
+              <Text style={styles.saveButtonText}>Create Company</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

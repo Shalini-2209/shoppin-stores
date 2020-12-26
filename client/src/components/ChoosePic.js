@@ -9,7 +9,6 @@ export default function ProductImg(props) {
   const dummyImg =
     "https://www.lankabangla.com/wp-content/uploads/2019/08/no_image_png_935227.png";
   const [image, setImage] = useState(dummyImg);
-  const [duplicate, setDuplicate] = useState(true);
   const imgInputRef = useRef(null);
 
   useEffect(() => {

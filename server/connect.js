@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const uploadPost = require("./routes/uploadPost");
+const profilePage = require("./routes/profilePage");
 const cors = require("cors");
 
 require("dotenv").config();
@@ -18,7 +19,7 @@ app.use(cors());
 // Data Parsing techniques
 
 // app.use(bodyParser.json());
-app.use(express.json());
+app.use(express.json({ limit: "5MB" }));
 app.use(express.urlencoded({ extended: false }));
 
 db.on("error", console.error.bind(console, "connection error:"));
@@ -32,6 +33,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/posts", uploadPost);
+
+app.use("/profile", profilePage);
 
 app.listen(3001, () => {
   console.log("Running on 3001");

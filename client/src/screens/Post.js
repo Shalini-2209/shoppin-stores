@@ -11,8 +11,9 @@ import {
 import axios from "axios";
 import Content from "./Content";
 import { TextField } from "@material-ui/core";
-import ProductImg from "./ChoosePic";
-
+import ProductImg from "../components/ChoosePic";
+import TopBar from "../components/TopBar";
+export const TitleContext = React.createContext();
 export default function Post() {
   const initialState = { name: "", price: "", image: "" };
   const [product, setProduct] = useState(initialState);
@@ -36,22 +37,23 @@ export default function Post() {
         console.log("Added a new product.");
         setProduct(initialState);
       })
-      .catch(() => {
-        console.log("Internal server error");
+      .catch((error) => {
+        console.log("Internal server error", error);
       });
   };
 
   const onImgAdded = (url) => {
     setProduct({ ...product, image: url });
-    // console.log(product.image, "is the url found");
   };
 
   return (
     <>
+      <View>
+        <TitleContext.Provider value={"New Post"}>
+          <TopBar />
+        </TitleContext.Provider>
+      </View>
       <View style={styles.container}>
-        <View>
-          <Text style={styles.header}>New Post</Text>
-        </View>
         <ScrollView>
           <View style={styles.inputContainer}>
             <TextField
@@ -87,6 +89,7 @@ export default function Post() {
               <Text style={styles.saveButtonText}>View </Text>
             </TouchableOpacity>
           </View>
+
           {flag && <Content />}
         </ScrollView>
       </View>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView, StyleSheet } from "react-native";
+import TopBar from "../components/TopBar";
 
+export const FeedContext = React.createContext();
 export default function Content() {
   const [content, setContent] = useState([]);
 
@@ -26,8 +28,13 @@ export default function Content() {
 
   return (
     <>
+      <View>
+        <FeedContext.Provider value={"Feed"}>
+          <TopBar />
+        </FeedContext.Provider>
+      </View>
       <ScrollView>
-        <View>
+        <View style={styles.container}>
           <ul>
             {content.map((item) => (
               <li key={item.name}>
@@ -46,3 +53,13 @@ export default function Content() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 65,
+    backgroundColor: "#F5FCFF",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
