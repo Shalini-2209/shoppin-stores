@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { View } from "react-native";
+import { View, Image, ScrollView } from "react-native";
 
 export default function Content() {
   const [content, setContent] = useState([]);
@@ -21,15 +21,23 @@ export default function Content() {
 
   return (
     <>
-      <View>
-        <ul>
-          {content.map((item) => (
-            <li key={item.name}>
-              {item.name} {item.price} {item.date}
-            </li>
-          ))}
-        </ul>
-      </View>
+      <ScrollView>
+        <View>
+          <ul>
+            {content.map((item) => (
+              <li key={item.name}>
+                {item.name} {item.price} {item.date}
+                {item.image && (
+                  <Image
+                    source={{ uri: item.image }}
+                    style={{ width: 200, height: 200 }}
+                  />
+                )}
+              </li>
+            ))}
+          </ul>
+        </View>
+      </ScrollView>
     </>
   );
 }

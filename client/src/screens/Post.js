@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
   View,
+  Button,
   TextInput,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
 import Content from "./Content";
-import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import { TextField } from "@material-ui/core";
 import ProductImg from "./ChoosePic";
 
 export default function Post() {
-  const initialState = { name: "", price: "" };
+  const initialState = { name: "", price: "", image: "" };
   const [product, setProduct] = useState(initialState);
   const [flag, setFlag] = useState(false);
 
@@ -24,6 +24,7 @@ export default function Post() {
     const payload = {
       name: product.name,
       price: product.price,
+      image: product.image,
     };
 
     axios({
@@ -33,11 +34,16 @@ export default function Post() {
     })
       .then(() => {
         console.log("Added a new product.");
-        setProduct({ name: "", price: "" });
+        setProduct(initialState);
       })
       .catch(() => {
         console.log("Internal server error");
       });
+  };
+
+  const onImgAdded = (url) => {
+    setProduct({ ...product, image: url });
+    // console.log(product.image, "is the url found");
   };
 
   return (
@@ -67,8 +73,7 @@ export default function Post() {
           </View>
 
           <View>
-            {" "}
-            <ProductImg />
+            <ProductImg onImgAdded={onImgAdded} />
           </View>
 
           <View style={styles.inputContainer}>
@@ -82,7 +87,6 @@ export default function Post() {
               <Text style={styles.saveButtonText}>View </Text>
             </TouchableOpacity>
           </View>
-
           {flag && <Content />}
         </ScrollView>
       </View>

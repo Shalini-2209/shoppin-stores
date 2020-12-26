@@ -43,12 +43,16 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Notifications"
+        name="Add New Product"
         component={Post}
         options={{
-          tabBarLabel: "Updates",
+          tabBarLabel: "New Post",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={26} />
+            <MaterialCommunityIcons
+              name="plus-circle-outline"
+              size={26}
+              color={color}
+            />
           ),
         }}
       />

@@ -9,6 +9,10 @@ const schema = new mongoose.Schema({
     type: String,
     default: Date.now(),
   },
+
+  image: {
+    type: String,
+  },
 });
 
 module.exports = schema;

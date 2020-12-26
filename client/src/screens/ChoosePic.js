@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Image, View, Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 
-export default function ProductImg() {
+export default function ProductImg(props) {
   const [image, setImage] = useState(null);
+  const imgInputRef = useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -31,19 +32,36 @@ export default function ProductImg() {
 
     if (!result.cancelled) {
       setImage(result.uri);
+      const imgChosen = imgInputRef.current.attributes.value.nodeValue;
+      // console.log("Ref:", imgInputRef);
+      // console.log("Id: ", imgInputRef.current.id);
+      // console.log("Value: ", imgInputRef.current.attributes.value.nodeValue);
+      if (imgChosen) {
+        props.onImgAdded(imgChosen);
+      }
     }
   };
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Button
-        title="Pick an image from camera roll"
-        color="#db7093"
-        onPress={pickImage}
-      />
-      {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-      )}
-    </View>
+    <>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        {image && (
+          <View>
+            <Image
+              source={{ uri: image }}
+              style={{ width: 200, height: 200 }}
+            />
+            <span ref={imgInputRef} value={image} id="idforSpan"></span>
+          </View>
+        )}
+
+        <Button
+          title="Pick an image from camera roll"
+          color="#db7093"
+          onPress={pickImage}
+        />
+        {/* {image && <Button title={image} />} */}
+      </View>
+    </>
   );
 }
