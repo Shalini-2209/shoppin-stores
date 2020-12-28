@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { TitleContext } from "../screens/Post";
 import { ProfileContext } from "../screens/Profile";
+import NewProfile from "../screens/NewProfile";
 import { FeedContext } from "../screens/Content";
 import purple from "@material-ui/core/colors/purple";
 
@@ -26,8 +27,10 @@ export default function TopBar() {
   const classes = useStyles();
   const newPost = useContext(TitleContext);
   const createProfile = useContext(ProfileContext);
+  // const newProContext = useContext(CreateProContext);
   const feed = useContext(FeedContext);
-  const accent = purple.A200;
+
+  const [create, setCreate] = useState(false);
 
   return (
     <View>
@@ -47,10 +50,18 @@ export default function TopBar() {
             style={{ color: "#e28ca8" }}
           >
             {newPost} {createProfile} {feed}
+            {/* {newProContext} */}
           </Typography>
-          <Button color="inherit"></Button>
+          <Button
+            variant="outlined"
+            style={{ color: "#e28ca8" }}
+            onClick={() => setCreate(!create)}
+          >
+            Create Store
+          </Button>
         </Toolbar>
       </AppBar>
+      {create && <NewProfile />}
     </View>
   );
 }

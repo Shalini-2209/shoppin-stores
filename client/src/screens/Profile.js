@@ -1,128 +1,55 @@
-import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { TextField, InputLabel, MenuItem, Select } from "@material-ui/core";
-import ProductImg from "../components/ChoosePic";
+import { View, Image, ScrollView, StyleSheet } from "react-native";
 import TopBar from "../components/TopBar";
 export const ProfileContext = React.createContext();
 
 export default function ProfileScreen() {
-  const initialState = {
-    name: "",
-    slogan: "",
-    category: "",
-    logo: "",
-    appLink: "",
-  };
-  const [details, setDetails] = useState(initialState);
+  const [profile, setProfile] = useState([]);
 
-  const handleSave = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    getData();
+    setTimeout(getData());
+  }, []);
 
-    const payload = {
-      companyName: details.name,
-      slogan: details.slogan,
-      category: details.category,
-      logo: details.logo,
-      appLink: details.appLink,
-    };
-
+  const getData = () => {
     axios({
-      url: "http://localhost:3001/profile/create",
-      method: "POST",
-      data: payload,
+      url: "http://localhost:3001/profile/",
     })
-      .then(() => {
-        console.log("New company added!");
-        setDetails(initialState);
+      .then((res) => {
+        console.log("Profile Page has been loaded!");
+        const data = res.data;
+        setProfile(data);
       })
       .catch(() => {
-        console.log("Internal server error");
+        console.log("Error in retriving data..");
       });
-  };
-
-  const onImgAdded = (url) => {
-    setDetails({ ...details, logo: url });
   };
 
   return (
     <>
       <View>
-        <ProfileContext.Provider value={"Create Profile"}>
+        <ProfileContext.Provider value={"Feed"}>
           <TopBar />
         </ProfileContext.Provider>
       </View>
-
-      <View style={styles.container}>
-        <MaterialCommunityIcons name="account-group" size={35} color="black" />
-        <ScrollView>
-          <View style={styles.inputContainer}>
-            <TextField
-              id="standard"
-              label="Company Name"
-              maxLength={20}
-              value={details.name}
-              onChange={(e) => setDetails({ ...details, name: e.target.value })}
-            />
-
-            <TextField
-              id="standard-basic"
-              label="Tag Line"
-              maxLength={20}
-              value={details.slogan}
-              style={styles.nextLabel}
-              onChange={(e) =>
-                setDetails({ ...details, slogan: e.target.value })
-              }
-            />
-            <View style={styles.inputContainer}>
-              <InputLabel id="demo-simple-select-label">Category</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={details.category}
-                onChange={(e) =>
-                  setDetails({ ...details, category: e.target.value })
-                }
-              >
-                <MenuItem value="Books">Book Store</MenuItem>
-                <MenuItem value="Clothing">Clothing and Cosmetics</MenuItem>
-                <MenuItem value="Shoes">Shoe Mart</MenuItem>
-              </Select>
-            </View>
-          </View>
-
-          <View>
-            <ProductImg onImgAdded={onImgAdded} />
-          </View>
-
-          <TextField
-            id="standard-basic"
-            label="Application Link"
-            fullWidth
-            value={details.appLink}
-            style={styles.nextLabel}
-            onChange={(e) =>
-              setDetails({ ...details, appLink: e.target.value })
-            }
-          />
-
-          <View style={styles.inputContainer}>
-            <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-              <Text style={styles.saveButtonText}>Create Company</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <ul>
+            {profile.map((item) => (
+              <li key={item.name}>
+                {item.companyName} {item.slogan} {item.category} {item.appLink}
+                {item.logo && (
+                  <Image
+                    source={{ uri: item.logo }}
+                    style={{ width: 200, height: 200 }}
+                  />
+                )}
+              </li>
+            ))}
+          </ul>
+        </View>
+      </ScrollView>
     </>
   );
 }
@@ -134,30 +61,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5FCFF",
     justifyContent: "center",
     alignItems: "center",
-  },
-
-  header: {
-    fontSize: 25,
-    textAlign: "center",
-    margin: 10,
-    fontWeight: "bold",
-  },
-  inputContainer: {
-    paddingTop: 15,
-    paddingBottom: 15,
-  },
-
-  saveButton: {
-    borderWidth: 1,
-    borderColor: "#bc8f8f",
-    backgroundColor: "#db7093",
-    padding: 15,
-    alignItems: "center",
-    margin: 5,
-  },
-  saveButtonText: {
-    color: "#FFFFFF",
-    fontSize: 20,
-    textAlign: "center",
   },
 });
