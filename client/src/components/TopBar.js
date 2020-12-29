@@ -5,7 +5,6 @@ import { TitleContext } from "../screens/Post";
 import { ProfileContext } from "../screens/Profile";
 import NewProfile from "../screens/NewProfile";
 import { FeedContext } from "../screens/Content";
-
 import { View } from "react-native";
 
 export default function TopBar() {
