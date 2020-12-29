@@ -11,7 +11,7 @@ import axios from "axios";
 import Content from "./Content";
 import ProductImg from "../components/ChoosePic";
 import TopBar from "../components/TopBar";
-export const TitleContext = React.createContext();
+
 export default function Post() {
   const initialState = { name: "", price: "", image: "" };
   const [product, setProduct] = useState(initialState);
@@ -47,9 +47,9 @@ export default function Post() {
   return (
     <>
       <View>
-        <TitleContext.Provider value={"New Post"}>
-          <TopBar />
-        </TitleContext.Provider>
+        {/* <TitleContext.Provider value={"New Post"}> */}
+        <TopBar name="New Post" />
+        {/* </TitleContext.Provider> */}
       </View>
       <View style={styles.container}>
         <ScrollView>
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
   },
 
   saveButton: {
-    borderWidth: 1,
-    borderColor: "#bc8f8f",
+    borderWidth: 3,
+    borderColor: "black",
     backgroundColor: "#db7093",
     padding: 15,
     alignItems: "center",

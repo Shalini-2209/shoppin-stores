@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { View, Image, ScrollView, StyleSheet, Text } from "react-native";
 import TopBar from "../components/TopBar";
-export const ProfileContext = React.createContext();
 
 export default function ProfileScreen() {
   const [profile, setProfile] = useState([]);
@@ -30,9 +29,7 @@ export default function ProfileScreen() {
   return (
     <>
       <View>
-        <ProfileContext.Provider value={"Profile"}>
-          <TopBar />
-        </ProfileContext.Provider>
+        <TopBar name="Profile" />
       </View>
 
       <ScrollView>

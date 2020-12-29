@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const uploadPost = require("./routes/uploadPost");
+const registerUser = require("./routes/registerUser");
 const profilePage = require("./routes/profilePage");
 const cors = require("cors");
 
@@ -33,6 +34,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/posts", uploadPost);
+
+app.use("/register", registerUser);
 
 app.use("/profile", profilePage);
 

@@ -1,17 +1,10 @@
-import React, { useContext, useState } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { TitleContext } from "../screens/Post";
-import { ProfileContext } from "../screens/Profile";
 import NewProfile from "../screens/NewProfile";
-import { FeedContext } from "../screens/Content";
 import { View } from "react-native";
 
-export default function TopBar() {
-  const newPost = useContext(TitleContext);
-  const createProfile = useContext(ProfileContext);
-  const feed = useContext(FeedContext);
-
+export default function TopBar(props) {
   const [create, setCreate] = useState(false);
   let size = "auto";
   if (create) {
@@ -21,22 +14,14 @@ export default function TopBar() {
     <View style={{ height: size }}>
       <View
         // position="static"
-        style={{
-          backgroundColor: "black",
-          flexDirection: "row",
-          alignItems: "center",
-          padding: 10,
-          marginTop: "10%",
-        }}
+        style={styles.container}
       >
         <MaterialCommunityIcons name="menu" size={26} color="#db7093" />
 
-        <Text style={{ color: "#e28ca8", fontSize: 20 }}>
-          {feed} {newPost} {createProfile}
-        </Text>
+        <Text style={styles.textInput}> {props.name}</Text>
 
         <TouchableOpacity
-          style={{ position: "absolute", right: 15 }}
+          style={styles.button}
           onPress={() => setCreate(!create)}
         >
           <Text style={{ color: "#e28ca8" }}>CREATE STORE</Text>
@@ -46,3 +31,28 @@ export default function TopBar() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "black",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    marginTop: "10%",
+  },
+
+  textInput: {
+    color: "#e28ca8",
+    fontSize: 20,
+    padding: 10,
+  },
+
+  button: {
+    position: "absolute",
+    right: 15,
+    padding: 5,
+    borderWidth: 3,
+    borderColor: "#e28ca8",
+    // borderRadius: 40,
+  },
+});

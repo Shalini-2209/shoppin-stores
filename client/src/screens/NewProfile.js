@@ -12,8 +12,6 @@ import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ProductImg from "../components/ChoosePic";
 
-// export const CreateProContext = React.createContext();
-
 export default function NewProfile() {
   const initialState = {
     name: "",
@@ -62,7 +60,7 @@ export default function NewProfile() {
       <TextInput
         style={styles.textInput}
         maxLength={20}
-        defaultValue={details.name}
+        value={details.name}
         placeholder="Company Name"
         onChangeText={(text) => setDetails({ ...details, name: text })}
       />
@@ -70,7 +68,7 @@ export default function NewProfile() {
       <TextInput
         maxLength={20}
         style={styles.textInput}
-        defaultValue={details.slogan}
+        value={details.slogan}
         placeholder="Tagline"
         onChangeText={(text) => setDetails({ ...details, slogan: text })}
       />
@@ -79,18 +77,18 @@ export default function NewProfile() {
         maxLength={20}
         style={styles.textInput}
         placeholder="Choose Category"
-        defaultValue={details.category}
+        value={details.category}
         onChangeText={(text) => setDetails({ ...details, category: text })}
       />
 
       <TextInput
         placeholder="Enter App Link"
         style={styles.textInput}
-        defaultValue={details.appLink}
+        value={details.appLink}
         onChangeText={(text) => setDetails({ ...details, appLink: text })}
       />
 
-      {/* <ProductImg onImgAdded={onImgAdded} /> */}
+      <ProductImg onImgAdded={onImgAdded} />
 
       <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
         <Text style={styles.saveButtonText}>Create Store</Text>
