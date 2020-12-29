@@ -1,12 +1,6 @@
 import React, { useContext, useState } from "react";
-import { Text } from "react-native";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import { Text, TouchableOpacity } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TitleContext } from "../screens/Post";
 import { ProfileContext } from "../screens/Profile";
 import NewProfile from "../screens/NewProfile";
@@ -14,55 +8,41 @@ import { FeedContext } from "../screens/Content";
 
 import { View } from "react-native";
 
-const useStyles = makeStyles((theme) => ({
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
-
 export default function TopBar() {
-  const classes = useStyles();
   const newPost = useContext(TitleContext);
   const createProfile = useContext(ProfileContext);
-  // const newProContext = useContext(CreateProContext);
   const feed = useContext(FeedContext);
 
   const [create, setCreate] = useState(false);
-
+  let size = "auto";
+  if (create) {
+    size = "100%";
+  }
   return (
-    <View>
-      <AppBar position="static" style={{ backgroundColor: "black" }}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            style={{ color: "#db7093" }}
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Text>
-            <Typography
-              variant="h6"
-              className={classes.title}
-              style={{ color: "#e28ca8" }}
-            >
-              {feed} {newPost} {createProfile}
-              {/* {newProContext} */}
-            </Typography>
-          </Text>
-          <Button
-            variant="outlined"
-            style={{ color: "#e28ca8" }}
-            onClick={() => setCreate(!create)}
-          >
-            Create Store
-          </Button>
-        </Toolbar>
-      </AppBar>
+    <View style={{ height: size }}>
+      <View
+        // position="static"
+        style={{
+          backgroundColor: "black",
+          flexDirection: "row",
+          alignItems: "center",
+          padding: 10,
+          marginTop: "10%",
+        }}
+      >
+        <MaterialCommunityIcons name="menu" size={26} color="#db7093" />
+
+        <Text style={{ color: "#e28ca8", fontSize: 20 }}>
+          {feed} {newPost} {createProfile}
+        </Text>
+
+        <TouchableOpacity
+          style={{ position: "absolute", right: 15 }}
+          onPress={() => setCreate(!create)}
+        >
+          <Text style={{ color: "#e28ca8" }}>CREATE STORE</Text>
+        </TouchableOpacity>
+      </View>
       {create && <NewProfile />}
     </View>
   );

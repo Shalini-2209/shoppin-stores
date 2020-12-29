@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { View, Image, ScrollView, StyleSheet } from "react-native";
+import { View, Image, ScrollView, StyleSheet, Text } from "react-native";
 import TopBar from "../components/TopBar";
 
 export const FeedContext = React.createContext();
@@ -10,7 +10,6 @@ export default function Content() {
 
   useEffect(() => {
     getData();
-    setTimeout(getData(), 5000);
   }, []);
 
   const getData = () => {

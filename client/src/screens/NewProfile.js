@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
+  TextInput,
   ScrollView,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { TextField, InputLabel, MenuItem, Select } from "@material-ui/core";
 import ProductImg from "../components/ChoosePic";
-import TopBar from "../components/TopBar";
+
 // export const CreateProContext = React.createContext();
 
 export default function NewProfile() {
@@ -53,88 +54,70 @@ export default function NewProfile() {
   };
 
   return (
-    <>
-      {/* <View>
-        <CreateProContext.Provider value={"Create Profile"}>
-          <TopBar />
-        </CreateProContext.Provider>
-      </View> */}
-
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View style={styles.icon}>
         <MaterialCommunityIcons name="account-group" size={35} color="black" />
       </View>
 
-      <ScrollView>
-        <View>
-          <View style={styles.inputContainer}>
-            <TextField
-              id="standard"
-              label="Company Name"
-              maxLength={20}
-              value={details.name}
-              onChange={(e) => setDetails({ ...details, name: e.target.value })}
-            />
+      <TextInput
+        style={styles.textInput}
+        maxLength={20}
+        defaultValue={details.name}
+        placeholder="Company Name"
+        onChangeText={(text) => setDetails({ ...details, name: text })}
+      />
 
-            <TextField
-              id="standard-1"
-              label="Tag Line"
-              maxLength={20}
-              value={details.slogan}
-              style={styles.nextLabel}
-              onChange={(e) =>
-                setDetails({ ...details, slogan: e.target.value })
-              }
-            />
-            <View style={styles.inputContainer}>
-              <InputLabel id="demo-simple-select-label">Category</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={details.category}
-                onChange={(e) =>
-                  setDetails({ ...details, category: e.target.value })
-                }
-              >
-                <MenuItem value="Books">Book Store</MenuItem>
-                <MenuItem value="Clothing">Clothing and Cosmetics</MenuItem>
-                <MenuItem value="Shoes">Shoe Mart</MenuItem>
-              </Select>
-            </View>
-          </View>
+      <TextInput
+        maxLength={20}
+        style={styles.textInput}
+        defaultValue={details.slogan}
+        placeholder="Tagline"
+        onChangeText={(text) => setDetails({ ...details, slogan: text })}
+      />
 
-          <View>
-            <ProductImg onImgAdded={onImgAdded} />
-          </View>
+      <TextInput
+        maxLength={20}
+        style={styles.textInput}
+        placeholder="Choose Category"
+        defaultValue={details.category}
+        onChangeText={(text) => setDetails({ ...details, category: text })}
+      />
 
-          <TextField
-            id="standard-2"
-            label="Application Link"
-            fullWidth
-            value={details.appLink}
-            style={styles.nextLabel}
-            onChange={(e) =>
-              setDetails({ ...details, appLink: e.target.value })
-            }
-          />
+      <TextInput
+        placeholder="Enter App Link"
+        style={styles.textInput}
+        defaultValue={details.appLink}
+        onChangeText={(text) => setDetails({ ...details, appLink: text })}
+      />
 
-          <View style={styles.inputContainer}>
-            <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-              <Text style={styles.saveButtonText}>Create Company</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ScrollView>
-    </>
+      {/* <ProductImg onImgAdded={onImgAdded} /> */}
+
+      <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+        <Text style={styles.saveButtonText}>Create Store</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 65,
+    paddingTop: 25,
     backgroundColor: "#F5FCFF",
+  },
+
+  textInput: {
+    margin: 10,
+    borderBottomWidth: 1,
+    borderColor: "grey",
+  },
+
+  icon: {
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#F5FCFF",
+    // marginTop: "10%",
+    marginBottom: "10%",
   },
 
   header: {
@@ -143,10 +126,6 @@ const styles = StyleSheet.create({
     margin: 10,
     fontWeight: "bold",
   },
-  inputContainer: {
-    paddingTop: 15,
-    paddingBottom: 15,
-  },
 
   saveButton: {
     borderWidth: 1,
@@ -154,7 +133,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#db7093",
     padding: 15,
     alignItems: "center",
-    margin: 5,
+    marginTop: 20,
   },
   saveButtonText: {
     color: "#FFFFFF",

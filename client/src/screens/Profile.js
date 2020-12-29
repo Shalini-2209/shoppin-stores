@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { View, Image, ScrollView, StyleSheet } from "react-native";
+import { View, Image, ScrollView, StyleSheet, Text } from "react-native";
 import TopBar from "../components/TopBar";
 export const ProfileContext = React.createContext();
 
@@ -9,7 +9,7 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     getData();
-    setTimeout(getData());
+    // setTimeout(getData());
   }, []);
 
   const getData = () => {
@@ -30,7 +30,7 @@ export default function ProfileScreen() {
   return (
     <>
       <View>
-        <ProfileContext.Provider value={"Feed"}>
+        <ProfileContext.Provider value={"Profile"}>
           <TopBar />
         </ProfileContext.Provider>
       </View>
@@ -40,7 +40,6 @@ export default function ProfileScreen() {
           {profile.map((item) => (
             <View key={item.companyName}>
               <Text>
-                {" "}
                 {item.companyName} {item.slogan} {item.category} {item.appLink}
               </Text>
               {item.logo && (

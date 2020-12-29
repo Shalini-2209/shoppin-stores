@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import axios from "axios";
 import Content from "./Content";
-import { TextField } from "@material-ui/core";
 import ProductImg from "../components/ChoosePic";
 import TopBar from "../components/TopBar";
 export const TitleContext = React.createContext();
@@ -55,22 +54,20 @@ export default function Post() {
       </View>
       <View style={styles.container}>
         <ScrollView>
-          <View style={styles.inputContainer}>
-            <TextField
-              id="standard"
-              label="Product"
+          <View>
+            <TextInput
               maxLength={20}
+              placeholder="Enter Product Name"
               value={product.name}
-              onChange={(e) => setProduct({ ...product, name: e.target.value })}
+              style={styles.inputContainer}
+              onChangeText={(text) => setProduct({ ...product, name: text })}
             />
-            <TextField
-              id="standard-basic"
-              label="Price"
+            <TextInput
               maxLength={20}
+              placeholder="Enter price"
               value={product.price}
-              onChange={(e) =>
-                setProduct({ ...product, price: e.target.value })
-              }
+              style={styles.inputContainer}
+              onChangeText={(text) => setProduct({ ...product, price: text })}
             />
           </View>
 
@@ -78,7 +75,7 @@ export default function Post() {
             <ProductImg onImgAdded={onImgAdded} />
           </View>
 
-          <View style={styles.inputContainer}>
+          <View>
             <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
               <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
@@ -102,8 +99,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 65,
     backgroundColor: "#F5FCFF",
-    justifyContent: "center",
-    alignItems: "center",
   },
   header: {
     fontSize: 25,
@@ -112,8 +107,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   inputContainer: {
-    paddingTop: 15,
-    paddingBottom: 15,
+    margin: 10,
+    borderBottomWidth: 1,
+    borderColor: "grey",
   },
 
   saveButton: {
