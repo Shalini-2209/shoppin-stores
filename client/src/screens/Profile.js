@@ -19,6 +19,7 @@ export default function ProfileScreen() {
       .then((res) => {
         console.log("Profile Page has been loaded!");
         const data = res.data;
+        console.log(data);
         setProfile(data);
       })
       .catch(() => {
@@ -33,21 +34,23 @@ export default function ProfileScreen() {
           <TopBar />
         </ProfileContext.Provider>
       </View>
+
       <ScrollView>
         <View style={styles.container}>
-          <ul>
-            {profile.map((item) => (
-              <li key={item.name}>
+          {profile.map((item) => (
+            <View key={item.companyName}>
+              <Text>
+                {" "}
                 {item.companyName} {item.slogan} {item.category} {item.appLink}
-                {item.logo && (
-                  <Image
-                    source={{ uri: item.logo }}
-                    style={{ width: 200, height: 200 }}
-                  />
-                )}
-              </li>
-            ))}
-          </ul>
+              </Text>
+              {item.logo && (
+                <Image
+                  source={{ uri: item.logo }}
+                  style={{ width: 200, height: 200 }}
+                />
+              )}
+            </View>
+          ))}
         </View>
       </ScrollView>
     </>

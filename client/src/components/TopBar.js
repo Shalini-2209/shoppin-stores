@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Text } from "react-native";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -10,7 +11,6 @@ import { TitleContext } from "../screens/Post";
 import { ProfileContext } from "../screens/Profile";
 import NewProfile from "../screens/NewProfile";
 import { FeedContext } from "../screens/Content";
-import purple from "@material-ui/core/colors/purple";
 
 import { View } from "react-native";
 
@@ -44,14 +44,16 @@ export default function TopBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            className={classes.title}
-            style={{ color: "#e28ca8" }}
-          >
-            {newPost} {createProfile} {feed}
-            {/* {newProContext} */}
-          </Typography>
+          <Text>
+            <Typography
+              variant="h6"
+              className={classes.title}
+              style={{ color: "#e28ca8" }}
+            >
+              {feed} {newPost} {createProfile}
+              {/* {newProContext} */}
+            </Typography>
+          </Text>
           <Button
             variant="outlined"
             style={{ color: "#e28ca8" }}

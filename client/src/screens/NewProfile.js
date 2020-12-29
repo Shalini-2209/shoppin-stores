@@ -62,7 +62,10 @@ export default function NewProfile() {
 
       <View style={styles.container}>
         <MaterialCommunityIcons name="account-group" size={35} color="black" />
-        <ScrollView>
+      </View>
+
+      <ScrollView>
+        <View>
           <View style={styles.inputContainer}>
             <TextField
               id="standard"
@@ -73,7 +76,7 @@ export default function NewProfile() {
             />
 
             <TextField
-              id="standard-basic"
+              id="standard-1"
               label="Tag Line"
               maxLength={20}
               value={details.slogan}
@@ -104,7 +107,7 @@ export default function NewProfile() {
           </View>
 
           <TextField
-            id="standard-basic"
+            id="standard-2"
             label="Application Link"
             fullWidth
             value={details.appLink}
@@ -119,8 +122,8 @@ export default function NewProfile() {
               <Text style={styles.saveButtonText}>Create Company</Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </>
   );
 }

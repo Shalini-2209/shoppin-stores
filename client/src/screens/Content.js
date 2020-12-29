@@ -4,6 +4,7 @@ import { View, Image, ScrollView, StyleSheet } from "react-native";
 import TopBar from "../components/TopBar";
 
 export const FeedContext = React.createContext();
+
 export default function Content() {
   const [content, setContent] = useState([]);
 
@@ -35,19 +36,20 @@ export default function Content() {
       </View>
       <ScrollView>
         <View style={styles.container}>
-          <ul>
-            {content.map((item) => (
-              <li key={item.name}>
+          {content.map((item) => (
+            <View key={item.name}>
+              <Text>
+                {" "}
                 {item.name} {item.price} {item.date}
-                {item.image && (
-                  <Image
-                    source={{ uri: item.image }}
-                    style={{ width: 200, height: 200 }}
-                  />
-                )}
-              </li>
-            ))}
-          </ul>
+              </Text>
+              {item.image && (
+                <Image
+                  source={{ uri: item.image }}
+                  style={{ width: 200, height: 200 }}
+                />
+              )}
+            </View>
+          ))}
         </View>
       </ScrollView>
     </>
