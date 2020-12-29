@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
   ScrollView,
   TouchableOpacity,
@@ -37,7 +36,7 @@ export default function Post() {
         setProduct(initialState);
       })
       .catch((error) => {
-        console.log("Internal server error", error);
+        console.log("Internal server error.", error);
       });
   };
 
