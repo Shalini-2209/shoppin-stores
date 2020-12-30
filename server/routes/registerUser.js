@@ -19,4 +19,31 @@ router
     });
   });
 
+router.route("/").get((req, res) => {
+  User.find({})
+    .then((data) => {
+      console.log("Data retrieved successfully ");
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log("error: ", error);
+    });
+});
+
+router.route("/users").post((req, res) => {
+  let user = req.body;
+  User.find({ mobile: user.mobile })
+    .then((data) => {
+      if (data.mobile == user.mobile && data.password == user.password) {
+        console.log("Data retrieved successfully ", data);
+        res.json(data);
+      } else {
+        res.send("");
+      }
+    })
+    .catch((error) => {
+      console.log("error: ", error);
+    });
+});
+
 module.exports = router;

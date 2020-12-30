@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
-import { Ionicons } from "@expo/vector-icons";
 export default function Register() {
   const initialState = {
     userName: "",
@@ -41,6 +40,7 @@ export default function Register() {
 
   return (
     <View style={styles.container}>
+      {/* <Header /> */}
       <TextInput
         style={styles.textInput}
         maxLength={20}
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
-    margin: 15,
+    marginBottom: 15,
     borderBottomWidth: 1,
     borderColor: "grey",
   },

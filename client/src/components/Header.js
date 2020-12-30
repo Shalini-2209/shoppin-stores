@@ -1,16 +1,18 @@
 import { AntDesign } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
 
 const Header = () => {
   return (
-    <View style={styles.icon}>
-      <AntDesign name="instagram" size={30} color="black" />
-      <Text style={styles.header}>
-        {" "}
-        Insta<Text style={{ color: "#db7093" }}> Stores </Text>
-      </Text>
-    </View>
+    <>
+      <View style={styles.icon}>
+        <AntDesign name="instagram" size={30} color="black" />
+        <Text style={styles.header}>
+          {" "}
+          Insta<Text style={{ color: "#db7093" }}> Stores </Text>
+        </Text>
+      </View>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 const express = require("express");
-const Profile = require("../database/models/ProfileModel");
+const Stores = require("../database/models/ProfileModel");
 const router = express.Router();
 
 router
@@ -7,9 +7,9 @@ router
 
   .post((req, res) => {
     let data = req.body;
-    let newProfile = new Profile(data);
+    let newStore = new Stores(data);
 
-    newProfile.save((error) => {
+    newStore.save((error) => {
       if (error) {
         res.status(500).json({ msg: "Error appeared while saving data." });
         return;
@@ -22,13 +22,13 @@ router
   });
 
 router.route("/").get((req, res) => {
-  Profile.find({})
+  Stores.find({})
     .then((data) => {
       console.log("Data retrieved successfully ");
       res.json(data);
     })
     .catch((error) => {
-      console.log("Error: ", error);
+      console.log("error: ", error);
     });
 });
 

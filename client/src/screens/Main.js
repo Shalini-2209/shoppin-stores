@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Header from "../components/Header";
 import Register from "./Register";
+import Login from "./Login";
 
 export default function Main() {
   const [reg, setReg] = useState(false);
-  const [log, setLog] = useState(false);
+  const [log, setLog] = useState(true);
+
   return (
     <View style={styles.container}>
-      <View>
-        <Header />
-      </View>
+      <Header />
       <View style={styles.buttonWrapper}>
         <TouchableOpacity
           style={styles.saveButton}
@@ -32,9 +32,8 @@ export default function Main() {
           <Text style={styles.saveButtonText}>Member !</Text>
         </TouchableOpacity>
       </View>
-
       {reg && <Register />}
-      {log && "log"}
+      {log && <Login />}
     </View>
   );
 }
@@ -54,10 +53,13 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     // borderColor: "#bc8f8f",
     backgroundColor: "black",
+    borderColor: "#db7093",
+    borderWidth: 1,
     color: "#db7093",
     padding: 10,
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 5,
+    // marginBottom: 20,
     marginRight: 10,
   },
 
