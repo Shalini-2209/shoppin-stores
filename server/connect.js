@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const uploadPost = require("./routes/uploadPost");
 const registerUser = require("./routes/registerUser");
-const profilePage = require("./routes/profilePage");
+const profilePage = require("./routes/storesPage");
 const cors = require("cors");
 
 require("dotenv").config();

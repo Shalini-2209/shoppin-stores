@@ -12,11 +12,16 @@ export default function Register() {
     userName: "",
     mobile: "",
     password: "",
+    cpass: "",
   };
   const [register, setRegister] = useState(initialState);
 
   const handleSave = (e) => {
     e.preventDefault();
+    if (register.cpass != register.password) {
+      alert("Passwords didn't match!");
+      return;
+    }
 
     const payload = {
       userName: register.userName,
@@ -35,6 +40,7 @@ export default function Register() {
       })
       .catch(() => {
         console.log("Internal server error");
+        alert("Registration failed!");
       });
   };
 
@@ -61,8 +67,20 @@ export default function Register() {
         maxLength={20}
         style={styles.textInput}
         value={register.password}
+        secureTextEntry={true}
         placeholder="Password"
         onChangeText={(text) => setRegister({ ...register, password: text })}
+      />
+
+      <TextInput
+        maxLength={20}
+        style={styles.textInput}
+        value={register.cpass}
+        secureTextEntry={true}
+        placeholder="Confirm Password"
+        onChangeText={(text) => {
+          setRegister({ ...register, cpass: text });
+        }}
       />
 
       <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
@@ -81,7 +99,7 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
-    marginBottom: 15,
+    margin: 15,
     borderBottomWidth: 1,
     borderColor: "grey",
   },

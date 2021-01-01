@@ -31,11 +31,14 @@ export default function Login() {
       url: " http://localhost:3001/register/users",
       data: payload,
     })
-      .then((data) => {
-        setGetIn(true);
-        alert(data);
-        setForm(false);
-        console.log("You are logged in!");
+      .then((msg) => {
+        console.log(msg.data.length);
+        if (msg.data.length == 1) {
+          setGetIn(true);
+          setForm(false);
+        } else {
+          alert("Invalid user!");
+        }
       })
       .catch(() => {
         console.log("Internal server error");
@@ -59,6 +62,7 @@ export default function Login() {
             maxLength={20}
             style={styles.textInput}
             value={log.password}
+            secureTextEntry={true}
             placeholder="Password"
             onChangeText={(text) => setLog({ ...log, password: text })}
           />

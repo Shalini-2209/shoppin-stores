@@ -31,18 +31,20 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/users").post((req, res) => {
-  let user = req.body;
-  User.find({ mobile: user.mobile })
+  const { mobile, password } = req.body;
+
+  if (!mobile || !password) return res.send({ isLogged: false });
+
+  User.find({ mobile, password })
     .then((data) => {
-      if (data.mobile == user.mobile && data.password == user.password) {
-        console.log("Data retrieved successfully ", data);
-        res.json(data);
-      } else {
-        res.send("");
+      if (data.length == 0) {
+        return res.send(data);
       }
+      console.log("::: Data retrieved successfully :::", data);
+      res.send(data);
     })
     .catch((error) => {
-      console.log("error: ", error);
+      console.warn("error: ", error);
     });
 });
 
