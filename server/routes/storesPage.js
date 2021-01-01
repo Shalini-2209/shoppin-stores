@@ -11,7 +11,9 @@ router
 
     newStore.save((error) => {
       if (error) {
-        res.status(500).json({ msg: "Error appeared while saving data." });
+        res
+          .status(500)
+          .json({ msg: "Error appeared while saving data." + error });
         return;
       }
       res.send(
@@ -21,14 +23,15 @@ router
     });
   });
 
-router.route("/").get((req, res) => {
-  Stores.find({})
+router.route("/:phone").get((req, res) => {
+  const mobile = parseInt(req.params.phone);
+  Stores.find({ mobile })
     .then((data) => {
       console.log("Data retrieved successfully ");
       res.json(data);
     })
     .catch((error) => {
-      console.log("error: ", error);
+      console.log("Error: ", error);
     });
 });
 

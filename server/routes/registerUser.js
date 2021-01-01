@@ -32,15 +32,13 @@ router.route("/").get((req, res) => {
 
 router.route("/users").post((req, res) => {
   const { mobile, password } = req.body;
-
-  if (!mobile || !password) return res.send({ isLogged: false });
+  // let phone = req.params.phone;
+  // console.log(phone);
+  if (!mobile || !password) return res.send();
 
   User.find({ mobile, password })
     .then((data) => {
-      if (data.length == 0) {
-        return res.send(data);
-      }
-      console.log("::: Data retrieved successfully :::", data);
+      // console.log("::: Data retrieved successfully :::", data);
       res.send(data);
     })
     .catch((error) => {

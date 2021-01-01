@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import SwitchTabs from "../navigations/SwitchTabs";
 import Header from "../components/Header";
@@ -18,6 +19,15 @@ export default function Login() {
   const [getIn, setGetIn] = useState(false);
   const [form, setForm] = useState(true);
 
+  useEffect(() => {
+    AsyncStorage.getItem("credentials").then((res) => {
+      if (res) {
+        setGetIn(true);
+        setForm(false);
+      }
+    });
+  }, []);
+
   const handleSave = () => {
     // e.preventDefault();
 
@@ -28,13 +38,15 @@ export default function Login() {
 
     axios({
       method: "post",
-      url: " http://localhost:3001/register/users",
+      url: "http://localhost:3001/register/users",
       data: payload,
     })
       .then((msg) => {
         console.log(msg.data.length);
         if (msg.data.length == 1) {
           setGetIn(true);
+          AsyncStorage.setItem("credentials", JSON.stringify(msg.data));
+          console.log(msg.data);
           setForm(false);
         } else {
           alert("Invalid user!");

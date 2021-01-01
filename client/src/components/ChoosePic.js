@@ -35,24 +35,15 @@ export default function ProductImg(props) {
 
     if (!result.cancelled) {
       setImage(result.uri);
-      // const imgChosen = imgInputRef.current.attributes.value.nodeValue;
-      // console.log("Ref:", imgInputRef);
-      // console.log("Id: ", imgInputRef.current.uri);
-      // console.log("Value: ", imgInputRef.current.attributes.value.nodeValue);
       if (result.uri != dummyImg) {
         props.onImgAdded(result.uri);
-      }
+      } else props.onImgAdded(dummyImg);
     }
   };
 
   return (
     <>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        {/* {image && (
-          <View>
-            <span ref={imgInputRef} value={image} id="idforSpan"></span>
-          </View>
-        )} */}
         <View style={{ flexDirection: "row" }}>
           <Image
             source={{ uri: image }}
@@ -66,11 +57,7 @@ export default function ProductImg(props) {
             color="black"
             style={{ position: "absolute", bottom: 0 }}
           />
-
-          {/* <View ref={imgInputRef} value={image}></View> */}
         </View>
-
-        {/* {image && <span ref={imgInputRef} value={image} id="idforSpan"></span>} */}
       </View>
     </>
   );

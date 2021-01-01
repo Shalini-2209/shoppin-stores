@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import NewProfile from "../screens/NewProfile";
+import NewProfile from "../screens/CreateStore";
 import { View } from "react-native";
 
 export default function TopBar(props) {
@@ -27,7 +27,7 @@ export default function TopBar(props) {
           <Text style={{ color: "#e28ca8" }}>CREATE STORE</Text>
         </TouchableOpacity>
       </View>
-      {create && <NewProfile />}
+      <ScrollView>{create && <NewProfile />}</ScrollView>
     </View>
   );
 }

@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const uploadPost = require("./routes/uploadPost");
 const registerUser = require("./routes/registerUser");
-const profilePage = require("./routes/storesPage");
+const storesPage = require("./routes/storesPage");
 const cors = require("cors");
 
 require("dotenv").config();
@@ -37,7 +37,7 @@ app.use("/posts", uploadPost);
 
 app.use("/register", registerUser);
 
-app.use("/profile", profilePage);
+app.use("/profile", storesPage);
 
 app.listen(3001, () => {
   console.log("Running on 3001");

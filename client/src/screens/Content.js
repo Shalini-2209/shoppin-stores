@@ -29,9 +29,7 @@ export default function Content() {
   return (
     <>
       <View>
-        {/* <FeedContext.Provider value={"Feed"}> */}
         <TopBar name="Feed" />
-        {/* </FeedContext.Provider> */}
       </View>
       <ScrollView>
         <View style={styles.container}>

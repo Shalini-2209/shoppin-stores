@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,19 +8,30 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ProductImg from "../components/ChoosePic";
 
 export default function NewProfile() {
+  useEffect(() => {
+    AsyncStorage.getItem("credentials").then((res) => {
+      res = JSON.parse(res);
+      console.log(res[0].mobile);
+      setPhone(res[0].mobile);
+    });
+  }, []);
+
   const initialState = {
     name: "",
     slogan: "",
     category: "",
     logo: "",
     appLink: "",
+    mobile: phone,
   };
   const [details, setDetails] = useState(initialState);
+  const [phone, setPhone] = useState("");
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -31,6 +42,7 @@ export default function NewProfile() {
       category: details.category,
       logo: details.logo,
       appLink: details.appLink,
+      mobile: phone,
     };
 
     axios({
@@ -53,46 +65,52 @@ export default function NewProfile() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.icon}>
-        <MaterialCommunityIcons name="account-group" size={35} color="black" />
-      </View>
+      <ScrollView>
+        <View style={styles.icon}>
+          <MaterialCommunityIcons
+            name="account-group"
+            size={35}
+            color="black"
+          />
+        </View>
 
-      <TextInput
-        style={styles.textInput}
-        maxLength={20}
-        value={details.name}
-        placeholder="Company Name"
-        onChangeText={(text) => setDetails({ ...details, name: text })}
-      />
+        <TextInput
+          style={styles.textInput}
+          maxLength={20}
+          value={details.name}
+          placeholder="Company Name"
+          onChangeText={(text) => setDetails({ ...details, name: text })}
+        />
 
-      <TextInput
-        maxLength={20}
-        style={styles.textInput}
-        value={details.slogan}
-        placeholder="Tagline"
-        onChangeText={(text) => setDetails({ ...details, slogan: text })}
-      />
+        <TextInput
+          maxLength={20}
+          style={styles.textInput}
+          value={details.slogan}
+          placeholder="Tagline"
+          onChangeText={(text) => setDetails({ ...details, slogan: text })}
+        />
 
-      <TextInput
-        maxLength={20}
-        style={styles.textInput}
-        placeholder="Choose Category"
-        value={details.category}
-        onChangeText={(text) => setDetails({ ...details, category: text })}
-      />
+        <TextInput
+          maxLength={20}
+          style={styles.textInput}
+          placeholder="Choose Category"
+          value={details.category}
+          onChangeText={(text) => setDetails({ ...details, category: text })}
+        />
 
-      <TextInput
-        placeholder="Enter App Link"
-        style={styles.textInput}
-        value={details.appLink}
-        onChangeText={(text) => setDetails({ ...details, appLink: text })}
-      />
+        <TextInput
+          placeholder="Enter App Link"
+          style={styles.textInput}
+          value={details.appLink}
+          onChangeText={(text) => setDetails({ ...details, appLink: text })}
+        />
 
-      <ProductImg onImgAdded={onImgAdded} />
+        <ProductImg onImgAdded={onImgAdded} />
 
-      <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-        <Text style={styles.saveButtonText}>Create Store</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+          <Text style={styles.saveButtonText}>Create Store</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }
