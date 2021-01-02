@@ -6,6 +6,7 @@ import TopBar from "../components/TopBar";
 
 export default function ProfileScreen() {
   const [profile, setProfile] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(0);
 
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function ProfileScreen() {
       setUser(res[0].mobile);
       console.log("Response", res[0].mobile);
       getData(res[0].mobile);
+      getPosts(res[0].mobile);
     });
 
     // setTimeout(getData());
@@ -33,6 +35,20 @@ export default function ProfileScreen() {
       });
   };
 
+  const getPosts = (num) => {
+    axios({
+      url: `http://localhost:3001/posts/users${num}`,
+    })
+      .then((res) => {
+        console.log("Posts has been loaded!");
+        const data = res.data;
+        setPosts(data);
+      })
+      .catch(() => {
+        console.log("Error in retriving data..");
+      });
+  };
+
   return (
     <>
       <View>
@@ -40,20 +56,33 @@ export default function ProfileScreen() {
       </View>
 
       <ScrollView>
-        <View style={styles.container}>
-          <Text>{user.userName}</Text>
+        <View style={styles.containerOne}>
           {profile.map((item) => (
             <View key={item.companyName}>
-              <Text>
-                {" "}
-                {item.companyName} {item.slogan} {item.category} {item.appLink}
-              </Text>
-              {/* {item.logo && ( */}
               <Image
                 source={{ uri: item.logo }}
-                style={{ width: 200, height: 200 }}
+                style={{ width: 100, height: 100, borderRadius: 50 }}
+              />
+              <Text>{user.userName}</Text>
+              <Text>
+                {" "}
+                {item.companyName} {item.category} {item.appLink}
+              </Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.container}>
+          {posts.map((item) => (
+            <View key={item._id}>
+              {/* {item.logo && ( */}
+              <Image
+                source={{ uri: item.image }}
+                style={{ width: 200, height: 100 }}
               />
               {/* )} */}
+              <Text>{user.userName}</Text>
+              <Text> {item.name}</Text>
             </View>
           ))}
         </View>
@@ -66,6 +95,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 65,
+    backgroundColor: "#F5FCFF",
+    // justifyContent: "center",
+    // alignItems: "center",
+  },
+
+  containerOne: {
+    flex: 1,
+    paddingTop: 65,
+    paddingBottom: 65,
     backgroundColor: "#F5FCFF",
     justifyContent: "center",
     alignItems: "center",

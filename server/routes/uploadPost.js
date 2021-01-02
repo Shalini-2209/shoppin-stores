@@ -29,4 +29,15 @@ router.route("/").get((req, res) => {
     });
 });
 
+router.route("/users:phone").get((req, res) => {
+  const mobile = parseInt(req.params.phone);
+  Post.find({ mobile })
+    .then((data) => {
+      console.log("Posts retrieved successfully ");
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log("Error: ", error);
+    });
+});
 module.exports = router;

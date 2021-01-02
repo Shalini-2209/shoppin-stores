@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Content from "./Content";
 import ProductImg from "../components/ChoosePic";
 import TopBar from "../components/TopBar";
@@ -16,6 +17,15 @@ export default function Post() {
   const initialState = { name: "", price: "", image: "" };
   const [product, setProduct] = useState(initialState);
   const [flag, setFlag] = useState(false);
+  const [phone, setPhone] = useState("");
+
+  useEffect(() => {
+    AsyncStorage.getItem("credentials").then((res) => {
+      res = JSON.parse(res);
+      console.log(res[0].mobile);
+      setPhone(res[0].mobile);
+    });
+  }, []);
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -24,6 +34,7 @@ export default function Post() {
       name: product.name,
       price: product.price,
       image: product.image,
+      mobile: phone,
     };
 
     axios({
