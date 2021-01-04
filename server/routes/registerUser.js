@@ -26,7 +26,7 @@ router.route("/").get((req, res) => {
       res.json(data);
     })
     .catch((error) => {
-      console.log("error: ", error);
+      console.log("Error: ", error);
     });
 });
 

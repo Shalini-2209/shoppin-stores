@@ -58,9 +58,7 @@ export default function Post() {
   return (
     <>
       <View>
-        {/* <TitleContext.Provider value={"New Post"}> */}
         <TopBar name="New Post" />
-        {/* </TitleContext.Provider> */}
       </View>
       <View style={styles.container}>
         <ScrollView>

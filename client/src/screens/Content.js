@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { View, Image, ScrollView, StyleSheet, Text } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import TopBar from "../components/TopBar";
 
 export const FeedContext = React.createContext();
@@ -26,28 +28,26 @@ export default function Content() {
       });
   };
 
+  const LeftContent = () => (
+    <AntDesign name="rightcircle" size={26} color="black" />
+  );
+
   return (
     <>
       <View>
         <TopBar name="Feed" />
       </View>
       <ScrollView>
-        <View style={styles.container}>
-          {content.map((item) => (
-            <View key={item.name}>
-              <Text>
-                {" "}
-                {item.name} {item.price} {item.date}
-              </Text>
-              {item.image && (
-                <Image
-                  source={{ uri: item.image }}
-                  style={{ width: 200, height: 200 }}
-                />
-              )}
-            </View>
-          ))}
-        </View>
+        {content.map((item) => (
+          <Card>
+            <Card.Title
+              title={item.store}
+              subtitle={item.name}
+              left={LeftContent}
+            />
+            <Card.Cover source={{ uri: item.image }} />
+          </Card>
+        ))}
       </ScrollView>
     </>
   );

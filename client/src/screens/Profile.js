@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { View, Image, ScrollView, StyleSheet, Text } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Button, Card, Title, Paragraph } from "react-native-paper";
+import {
+  View,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import TopBar from "../components/TopBar";
 
 export default function ProfileScreen() {
@@ -65,25 +74,32 @@ export default function ProfileScreen() {
               />
               <Text>{user.userName}</Text>
               <Text>
-                {" "}
-                {item.companyName} {item.category} {item.appLink}
+                {item.companyName} {item.appLink}
               </Text>
+              <Text>{item.slogan} </Text>
             </View>
           ))}
         </View>
 
         <View style={styles.container}>
           {posts.map((item) => (
-            <View key={item._id}>
-              {/* {item.logo && ( */}
-              <Image
-                source={{ uri: item.image }}
-                style={{ width: 200, height: 100 }}
-              />
-              {/* )} */}
-              <Text>{user.userName}</Text>
-              <Text> {item.name}</Text>
-            </View>
+            <Card>
+              {/* <Card.Title title={item.name} subtitle={item.price} /> */}
+
+              <Card.Cover source={{ uri: item.image }} style={styles.img} />
+              <Card.Content>
+                <Paragraph style={styles.data}>
+                  Rs. {item.price}
+                  <TouchableOpacity>
+                    <MaterialCommunityIcons
+                      name="delete"
+                      size={22}
+                      color="black"
+                    />
+                  </TouchableOpacity>
+                </Paragraph>
+              </Card.Content>
+            </Card>
           ))}
         </View>
       </ScrollView>
@@ -94,10 +110,14 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "row",
     paddingTop: 65,
     backgroundColor: "#F5FCFF",
-    // justifyContent: "center",
-    // alignItems: "center",
+  },
+
+  img: {
+    width: 200,
+    borderWidth: 2,
   },
 
   containerOne: {
