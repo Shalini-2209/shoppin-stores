@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default {\n  IP: \"http://192.168.43.6:3001\"\n};","map":{"version":3,"sources":["D:/mobile-app/client/config.js"],"names":["IP"],"mappings":"AAEA,eAAe;AAAEA,EAAAA,EAAE;AAAJ,CAAf","sourcesContent":["import { IP } from \"@env\";\r\n\r\nexport default { IP };\r\n"]},"metadata":{},"sourceType":"module"}

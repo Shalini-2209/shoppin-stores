@@ -9,7 +9,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import SwitchTabs from "../navigations/SwitchTabs";
-import config from "../../Config";
+import config from "../../config";
 export default function Login() {
   const initialState = {
     mobile: "",

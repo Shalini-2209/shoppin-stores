@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button, Card, Title, Paragraph } from "react-native-paper";
-import config from "../../Config";
+import config from "../../config";
 import {
   View,
   Image,
@@ -66,7 +66,6 @@ export default function ProfileScreen() {
       </View>
 
       <ScrollView>
-        <Text>{config.IP}</Text>
         <View style={styles.containerOne}>
           {profile.map((item) => (
             <View key={item.companyName}>

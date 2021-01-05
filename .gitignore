@@ -11,5 +11,7 @@ web-build/
 node_modules
 # macOS
 .DS_Store
-Config.js
+
+
+config.js
 .env

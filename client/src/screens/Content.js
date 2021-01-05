@@ -4,7 +4,7 @@ import { Button, Card, Title, Paragraph } from "react-native-paper";
 import { View, Image, ScrollView, StyleSheet, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import TopBar from "../components/TopBar";
-import config from "../../Config";
+import config from "../../config";
 
 export const FeedContext = React.createContext();
 

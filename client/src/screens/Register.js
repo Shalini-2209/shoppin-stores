@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
-import config from "../../Config";
+import config from "../../config";
 export default function Register() {
   const initialState = {
     userName: "",

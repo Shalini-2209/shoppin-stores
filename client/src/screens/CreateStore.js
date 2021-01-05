@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import config from "../../Config";
+import config from "../../config";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ProductImg from "../components/ChoosePic";
 
