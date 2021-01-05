@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import Content from "../screens/Content";
 import Post from "../screens/Post";
 import ProfileScreen from "../screens/Profile";
@@ -30,15 +31,15 @@ function MyTabs() {
       />
 
       <Tab.Screen
-        name="Chat"
+        name="Search"
         component={Content}
         options={{
-          tabBarLabel: "Chat",
+          tabBarLabel: "Explore",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
-              name="chat-processing"
-              color={color}
+              name="movie-search"
               size={26}
+              color={color}
             />
           ),
         }}

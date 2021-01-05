@@ -11,6 +11,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import TopBar from "../components/TopBar";
 
@@ -82,17 +83,22 @@ export default function ProfileScreen() {
           ))}
         </View>
 
-        <View style={styles.container}>
+        <View style={styles.containerTwo}>
           {posts.map((item) => (
             <Card key={item._id}>
               <Card.Cover source={{ uri: item.image }} style={styles.img} />
               <Card.Content>
                 <Paragraph style={styles.data}>
                   Rs. {item.price}
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.icon}
+                    onPress={() =>
+                      alert("Product Id to be noted: " + `${item._id}`)
+                    }
+                  >
                     <MaterialCommunityIcons
-                      name="delete"
-                      size={22}
+                      name="eye-plus"
+                      size={24}
                       color="black"
                     />
                   </TouchableOpacity>
@@ -107,18 +113,6 @@ export default function ProfileScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "row",
-    paddingTop: 65,
-    backgroundColor: "#F5FCFF",
-  },
-
-  img: {
-    width: 200,
-    borderWidth: 2,
-  },
-
   containerOne: {
     flex: 1,
     paddingTop: 65,
@@ -126,5 +120,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5FCFF",
     justifyContent: "center",
     alignItems: "center",
+  },
+  containerTwo: {
+    flex: 1,
+    flexDirection: "row",
+    paddingTop: 65,
+    flexWrap: "wrap",
+    backgroundColor: "#F5FCFF",
+  },
+
+  icon: {
+    paddingLeft: 95,
+  },
+
+  img: {
+    width: 200,
+    borderWidth: 2,
+    height: 150,
   },
 });
