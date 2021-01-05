@@ -7,6 +7,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import Content from "../screens/Content";
 import Post from "../screens/Post";
 import ProfileScreen from "../screens/Profile";
+import ExploreScreen from "../screens/Explore";
 import { BottomNavigation } from "react-native-paper";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -32,7 +33,7 @@ function MyTabs() {
 
       <Tab.Screen
         name="Search"
-        component={Content}
+        component={ExploreScreen}
         options={{
           tabBarLabel: "Explore",
           tabBarIcon: ({ color }) => (

@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     right: 15,
     padding: 5,
     borderWidth: 3,
-    borderColor: "#e28ca8",
+    borderColor: "#db7093",
     // borderRadius: 40,
   },
 });
