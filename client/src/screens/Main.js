@@ -5,13 +5,15 @@ import Header from "../components/Header";
 import Register from "./Register";
 import Login from "./Login";
 
-export default function Main() {
+export default function Main({ navigation }) {
   const [reg, setReg] = useState(false);
   const [log, setLog] = useState(true);
+  // const [header, setHeader] = useState(true);
 
   return (
     <View style={styles.container}>
       <Header />
+
       <View style={styles.buttonWrapper}>
         <TouchableOpacity
           style={styles.saveButton}
@@ -32,8 +34,9 @@ export default function Main() {
           <Text style={styles.saveButtonText}>Member !</Text>
         </TouchableOpacity>
       </View>
+
       {reg && <Register />}
-      {log && <Login />}
+      {log && <Login navigation={navigation} />}
     </View>
   );
 }
@@ -59,7 +62,6 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
     marginTop: 5,
-    // marginBottom: 20,
     marginRight: 10,
   },
 

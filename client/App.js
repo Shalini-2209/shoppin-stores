@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import Main from "./src/screens/Main";
+import NavigateScreens from "./src/navigations/NavigateScreens";
 
 export default function App() {
-  return <Main />;
+  return <NavigateScreens />;
 }

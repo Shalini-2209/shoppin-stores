@@ -1,9 +1,9 @@
 {
-  "webpackServerPort": 19006,
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://nk-82m.anonymous.client.exp.direct",
-  "packagerNgrokUrl": "https://packager.nk-82m.anonymous.client.exp.direct",
-  "ngrokPid": 9352,
+  "webpackServerPort": null,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "packagerPort": 19000,
   "packagerPid": null,
   "devToolsPort": 19002

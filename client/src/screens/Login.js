@@ -8,21 +8,20 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import SwitchTabs from "../navigations/SwitchTabs";
 import config from "../../config";
-export default function Login() {
+
+export default function Login(props) {
   const initialState = {
     mobile: "",
     password: "",
   };
   const [log, setLog] = useState(initialState);
-  const [getIn, setGetIn] = useState(false);
   const [form, setForm] = useState(true);
 
   useEffect(() => {
+    AsyncStorage.clear();
     AsyncStorage.getItem("credentials").then((res) => {
       if (res) {
-        setGetIn(true);
         setForm(false);
       }
     });
@@ -42,18 +41,16 @@ export default function Login() {
       data: payload,
     })
       .then((msg) => {
-        console.log(msg.data.length);
         if (msg.data.length == 1) {
-          setGetIn(true);
           AsyncStorage.setItem("credentials", JSON.stringify(msg.data));
-          console.log(msg.data);
           setForm(false);
+          props.navigation.navigate("SwitchTabs");
         } else {
           alert("Invalid user!");
         }
       })
-      .catch(() => {
-        console.log("Internal server error");
+      .catch((error) => {
+        console.log("Internal server error" + error);
       });
   };
 
@@ -61,7 +58,6 @@ export default function Login() {
     <View style={styles.container}>
       {form && (
         <View>
-          {/* <Header /> */}
           <TextInput
             style={styles.textInput}
             maxLength={20}
@@ -89,8 +85,6 @@ export default function Login() {
           </TouchableOpacity>
         </View>
       )}
-
-      {getIn && <SwitchTabs />}
     </View>
   );
 }
@@ -98,7 +92,6 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: 5,
     backgroundColor: "#F5FCFF",
     justifyContent: "center",
   },

@@ -23,7 +23,7 @@ export default function Post() {
   useEffect(() => {
     AsyncStorage.getItem("credentials").then((res) => {
       res = JSON.parse(res);
-      console.log(res[0].mobile);
+      // console.log(res[0].mobile);
       setPhone(res[0].mobile);
     });
   }, []);

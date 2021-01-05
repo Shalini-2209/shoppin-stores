@@ -1,14 +1,11 @@
 import * as React from "react";
 import { Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
 import Content from "../screens/Content";
 import Post from "../screens/Post";
 import ProfileScreen from "../screens/Profile";
 import ExploreScreen from "../screens/Explore";
-import { BottomNavigation } from "react-native-paper";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -73,9 +70,5 @@ function MyTabs() {
 }
 
 export default function SwitchTabs() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
+  return <MyTabs />;
 }

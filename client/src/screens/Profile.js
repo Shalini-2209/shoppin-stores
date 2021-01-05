@@ -25,12 +25,9 @@ export default function ProfileScreen() {
     AsyncStorage.getItem("credentials").then((res) => {
       res = JSON.parse(res);
       setUser(res[0].mobile);
-      console.log("Response", res[0].mobile);
       getData(res[0].mobile);
       getPosts(res[0].mobile);
     });
-
-    // setTimeout(getData());
   }, []);
 
   const getData = (num) => {
