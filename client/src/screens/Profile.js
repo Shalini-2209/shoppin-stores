@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Button, Card, Title, Paragraph } from "react-native-paper";
+import { Button, Card, Paragraph } from "react-native-paper";
 import config from "../../config";
 import {
   View,
