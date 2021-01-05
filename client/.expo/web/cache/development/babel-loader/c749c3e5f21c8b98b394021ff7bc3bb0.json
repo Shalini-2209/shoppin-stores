@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { IP } from \"@env\";\nexport default {\n  IP: IP\n};","map":{"version":3,"sources":["D:/mobile-app/client/src/components/Config.js"],"names":["IP"],"mappings":"AAAA,SAASA,EAAT,QAAmB,MAAnB;AAEA,eAAe;AAAEA,EAAAA,EAAE,EAAFA;AAAF,CAAf","sourcesContent":["import { IP } from \"@env\";\r\n\r\nexport default { IP };\r\n"]},"metadata":{},"sourceType":"module"}

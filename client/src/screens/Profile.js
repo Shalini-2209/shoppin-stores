@@ -3,6 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button, Card, Title, Paragraph } from "react-native-paper";
+import config from "../../Config";
 import {
   View,
   Image,
@@ -32,7 +33,7 @@ export default function ProfileScreen() {
 
   const getData = (num) => {
     axios({
-      url: `http://localhost:3001/profile/${num}`,
+      url: `${config.IP}/profile/${num}`,
     })
       .then((res) => {
         console.log("Profile Page has been loaded!");
@@ -46,7 +47,7 @@ export default function ProfileScreen() {
 
   const getPosts = (num) => {
     axios({
-      url: `http://localhost:3001/posts/users${num}`,
+      url: `${config.IP}/posts/users${num}`,
     })
       .then((res) => {
         console.log("Posts has been loaded!");
@@ -65,6 +66,7 @@ export default function ProfileScreen() {
       </View>
 
       <ScrollView>
+        <Text>{config.IP}</Text>
         <View style={styles.containerOne}>
           {profile.map((item) => (
             <View key={item.companyName}>
@@ -83,9 +85,7 @@ export default function ProfileScreen() {
 
         <View style={styles.container}>
           {posts.map((item) => (
-            <Card>
-              {/* <Card.Title title={item.name} subtitle={item.price} /> */}
-
+            <Card key={item._id}>
               <Card.Cover source={{ uri: item.image }} style={styles.img} />
               <Card.Content>
                 <Paragraph style={styles.data}>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   containerOne: {
     flex: 1,
     paddingTop: 65,
-    paddingBottom: 65,
+    // paddingBottom: 65,
     backgroundColor: "#F5FCFF",
     justifyContent: "center",
     alignItems: "center",

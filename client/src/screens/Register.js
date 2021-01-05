@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
+import config from "../../Config";
 export default function Register() {
   const initialState = {
     userName: "",
@@ -30,7 +31,7 @@ export default function Register() {
     };
 
     axios({
-      url: "http://localhost:3001/register/newUser",
+      url: `${config.IP}/register/newUser`,
       method: "POST",
       data: payload,
     })

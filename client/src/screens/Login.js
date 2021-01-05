@@ -9,7 +9,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import SwitchTabs from "../navigations/SwitchTabs";
-import Header from "../components/Header";
+import config from "../../Config";
 export default function Login() {
   const initialState = {
     mobile: "",
@@ -38,7 +38,7 @@ export default function Login() {
 
     axios({
       method: "post",
-      url: "http://localhost:3001/register/users",
+      url: `${config.IP}/register/users`,
       data: payload,
     })
       .then((msg) => {

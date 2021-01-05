@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import config from "../../Config";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ProductImg from "../components/ChoosePic";
 
@@ -46,7 +47,7 @@ export default function NewProfile() {
     };
 
     axios({
-      url: "http://localhost:3001/profile/create",
+      url: `${config.IP}/profile/create`,
       method: "POST",
       data: payload,
     })
@@ -147,6 +148,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#bc8f8f",
     backgroundColor: "#db7093",
+    borderRadius: 30,
     padding: 15,
     alignItems: "center",
     marginTop: 20,

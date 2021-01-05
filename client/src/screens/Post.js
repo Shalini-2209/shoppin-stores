@@ -10,11 +10,12 @@ import {
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Content from "./Content";
+import config from "../../Config";
 import ProductImg from "../components/ChoosePic";
 import TopBar from "../components/TopBar";
 
 export default function Post() {
-  const initialState = { name: "", price: "", image: "" };
+  const initialState = { name: "", price: "", store: "", image: "" };
   const [product, setProduct] = useState(initialState);
   const [flag, setFlag] = useState(false);
   const [phone, setPhone] = useState("");
@@ -35,10 +36,11 @@ export default function Post() {
       price: product.price,
       image: product.image,
       mobile: phone,
+      store: product.store,
     };
 
     axios({
-      url: "http://localhost:3001/posts/upload",
+      url: `${config.IP}/posts/upload`,
       method: "POST",
       data: payload,
     })
@@ -76,6 +78,14 @@ export default function Post() {
               value={product.price}
               style={styles.inputContainer}
               onChangeText={(text) => setProduct({ ...product, price: text })}
+            />
+
+            <TextInput
+              maxLength={20}
+              placeholder="Enter store"
+              value={product.store}
+              style={styles.inputContainer}
+              onChangeText={(text) => setProduct({ ...product, store: text })}
             />
           </View>
 
@@ -121,7 +131,7 @@ const styles = StyleSheet.create({
   },
 
   saveButton: {
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: "black",
     backgroundColor: "#db7093",
     padding: 15,

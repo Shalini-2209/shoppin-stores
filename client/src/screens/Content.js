@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
+import { Button, Card, Title, Paragraph } from "react-native-paper";
 import { View, Image, ScrollView, StyleSheet, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import TopBar from "../components/TopBar";
+import config from "../../Config";
 
 export const FeedContext = React.createContext();
 
@@ -16,7 +17,7 @@ export default function Content() {
 
   const getData = () => {
     axios({
-      url: "http://localhost:3001/posts/",
+      url: `${config.IP}/posts/`,
     })
       .then((res) => {
         console.log("Check out data");
@@ -39,7 +40,7 @@ export default function Content() {
       </View>
       <ScrollView>
         {content.map((item) => (
-          <Card>
+          <Card key={item._id}>
             <Card.Title
               title={item.store}
               subtitle={item.name}
