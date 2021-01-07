@@ -18,7 +18,7 @@ mongoose.connect(mongo_url, {
 
 app.use(cors());
 
-// Data Parsing techniques
+// Data Parsing techniques:
 
 // app.use(bodyParser.json());
 app.use(express.json({ limit: "5MB" }));
