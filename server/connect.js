@@ -10,7 +10,7 @@ require("dotenv").config();
 const app = express();
 const db = mongoose.connection;
 const mongo_url = process.env.MONGO_URL;
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 mongoose.connect(mongo_url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -40,6 +40,6 @@ app.use("/register", registerUser);
 
 app.use("/profile", storesPage);
 
-app.listen(PORT, () => {
+app.listen(port, () => {
   console.log("Running on 3001");
 });
