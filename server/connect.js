@@ -41,5 +41,5 @@ app.use("/register", registerUser);
 app.use("/profile", storesPage);
 
 app.listen(port, () => {
-  console.log("Running on 3001");
+  console.log("Running on " + `${port}`);
 });
