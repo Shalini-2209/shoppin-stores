@@ -34,10 +34,11 @@ export default function Login(props) {
       mobile: log.mobile,
       password: log.password,
     };
-
+    console.log(`${config.API}`);
     axios({
       method: "post",
-      url: `${config.IP}/register/users`,
+      // url: "http://insta-stores.herokuapp.com/register/users",
+      url: `${config.API}/register/users`,
       data: payload,
     })
       .then((msg) => {

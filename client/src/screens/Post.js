@@ -40,7 +40,7 @@ export default function Post() {
     };
 
     axios({
-      url: `${config.IP}/posts/upload`,
+      url: `${config.API}/posts/upload`,
       method: "POST",
       data: payload,
     })

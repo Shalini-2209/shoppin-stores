@@ -17,7 +17,7 @@ export default function Content() {
 
   const getData = () => {
     axios({
-      url: `${config.IP}/posts/`,
+      url: `${config.API}/posts/`,
     })
       .then((res) => {
         console.log("Check out data");

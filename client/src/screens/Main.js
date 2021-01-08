@@ -71,3 +71,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+//SCAN?tunneel sry

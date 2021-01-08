@@ -3,7 +3,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Card, Paragraph } from "react-native-paper";
-import { Clipboard } from "react-native";
 import config from "../../config";
 import {
   View,
@@ -32,7 +31,7 @@ export default function ProfileScreen() {
 
   const getData = (num) => {
     axios({
-      url: `${config.IP}/profile/${num}`,
+      url: `${config.API}/profile/${num}`,
     })
       .then((res) => {
         console.log("Profile Page has been loaded!");
@@ -46,7 +45,7 @@ export default function ProfileScreen() {
 
   const getPosts = (num) => {
     axios({
-      url: `${config.IP}/posts/users${num}`,
+      url: `${config.API}/posts/users${num}`,
     })
       .then((res) => {
         console.log("Posts has been loaded!");

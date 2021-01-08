@@ -47,7 +47,7 @@ export default function NewProfile() {
     };
 
     axios({
-      url: `${config.IP}/profile/create`,
+      url: `${config.API}/profile/create`,
       method: "POST",
       data: payload,
     })
