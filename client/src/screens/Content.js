@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Card, Title, Paragraph } from "react-native-paper";
-import { View, Image, ScrollView, StyleSheet, Text } from "react-native";
+import {
+  View,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  ActivityIndicator,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import TopBar from "../components/TopBar";
 import config from "../../config";
@@ -10,6 +17,11 @@ export const FeedContext = React.createContext();
 
 export default function Content() {
   const [content, setContent] = useState([]);
+  let load = false;
+
+  if (content.length == 0) {
+    load = true;
+  }
 
   useEffect(() => {
     getData();
@@ -38,6 +50,12 @@ export default function Content() {
       <View>
         <TopBar name="Feed" />
       </View>
+
+      {load && (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" color="#db7093" />
+        </View>
+      )}
       <ScrollView>
         {content.map((item) => (
           <Card key={item._id}>
@@ -60,6 +78,12 @@ const styles = StyleSheet.create({
     paddingTop: 65,
     backgroundColor: "#F5FCFF",
     justifyContent: "center",
+    alignItems: "center",
+  },
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
     alignItems: "center",
   },
 });

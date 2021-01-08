@@ -19,6 +19,11 @@ export default function ProfileScreen() {
   const [profile, setProfile] = useState([]);
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(0);
+  let load = false;
+
+  if (posts.length == 0) {
+    load = true;
+  }
 
   useEffect(() => {
     AsyncStorage.getItem("credentials").then((res) => {
@@ -62,6 +67,12 @@ export default function ProfileScreen() {
       <View>
         <TopBar name="Profile" />
       </View>
+
+      {load && (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" color="#db7093" />
+        </View>
+      )}
 
       <ScrollView>
         <View style={styles.containerOne}>
