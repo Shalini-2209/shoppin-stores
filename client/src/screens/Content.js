@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Card, Title, Paragraph } from "react-native-paper";
+import { Card } from "react-native-paper";
 import {
   View,
   Image,
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 65,
-    backgroundColor: "#F5FCFF",
+    // backgroundColor: "#F5FCFF",
     justifyContent: "center",
     alignItems: "center",
   },
