@@ -3,17 +3,17 @@ import { Searchbar } from "react-native-paper";
 import { View, StyleSheet, ScrollView } from "react-native";
 import TopBar from "../components/TopBar";
 import config from "../../config";
+import { AntDesign } from "@expo/vector-icons";
 import { Card } from "react-native-paper";
 import axios from "axios";
 
-export default function ExploreScreen() {
+export default function ExploreScreen({ navigation }) {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [storesList, setStoresList] = React.useState([]);
 
   const onChangeSearch = (query) => setSearchQuery(query);
 
   const fetchStores = () => {
-    const val = searchQuery;
     axios({
       url: `${config.URI}/profile/stores${searchQuery}`,
     })
@@ -23,10 +23,19 @@ export default function ExploreScreen() {
         if (data.length > 0) {
           setStoresList(data);
         }
+        setSearchQuery("");
       })
       .catch(() => {
         console.log("Error in retriving data..");
       });
+  };
+
+  const LeftContent = () => (
+    <AntDesign name="profile" size={24} color="black" />
+  );
+
+  const openProfile = () => {
+    navigation.navigate("Store");
   };
 
   return (
@@ -45,13 +54,12 @@ export default function ExploreScreen() {
       {storesList && (
         <ScrollView>
           {storesList.map((item) => (
-            <Card key={item._id} style={styles.card}>
+            <Card key={item._id} onPress={openProfile}>
               <Card.Title
                 title={item.companyName}
                 subtitle={item.slogan}
-                // left={LeftContent}
+                left={LeftContent}
               />
-              <Card.Cover source={{ uri: item.logo }} style={styles.img} />
             </Card>
           ))}
         </ScrollView>
@@ -63,14 +71,5 @@ export default function ExploreScreen() {
 const styles = StyleSheet.create({
   explore: {
     marginTop: 5,
-  },
-  img: {
-    width: 150,
-    height: 100,
-  },
-  card: {
-    width: 200,
-    marginTop: 20,
-    marginLeft: 5,
   },
 });

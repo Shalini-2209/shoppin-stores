@@ -10,8 +10,8 @@ require("dotenv").config();
 const app = express();
 const db = mongoose.connection;
 const mongo_url = process.env.MONGO_URL;
-// const port = process.env.PORT || 3001;
-const port = 3001;
+const port = process.env.PORT || 3001;
+
 mongoose.connect(mongo_url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

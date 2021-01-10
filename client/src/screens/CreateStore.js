@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 25,
-    backgroundColor: "#F5FCFF",
+    //   backgroundColor: "#F5FCFF",
   },
 
   textInput: {

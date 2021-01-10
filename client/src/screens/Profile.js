@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   containerOne: {
     flex: 1,
     paddingTop: 45,
-    backgroundColor: "#F5FCFF",
+    // backgroundColor: "#F5FCFF",
   },
   containerTwo: {
     flex: 1,
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     paddingTop: 45,
     paddingLeft: 5,
     flexWrap: "wrap",
-    backgroundColor: "#F5FCFF",
+    // backgroundColor: "#F5FCFF",
   },
 
   proPic: {
