@@ -31,7 +31,7 @@ export default function Register() {
     };
 
     axios({
-      url: `${config.IP}/register/newUser`,
+      url: `${config.URI}/register/newUser`,
       method: "POST",
       data: payload,
     })

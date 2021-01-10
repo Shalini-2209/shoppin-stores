@@ -28,17 +28,14 @@ export default function Login(props) {
   }, []);
 
   const handleSave = () => {
-    // e.preventDefault();
-
     const payload = {
       mobile: log.mobile,
       password: log.password,
     };
-    console.log(`${config.API}`);
+
     axios({
       method: "post",
-      // url: "http://insta-stores.herokuapp.com/register/users",
-      url: `${config.API}/register/users`,
+      url: `${config.URI}/register/users`,
       data: payload,
     })
       .then((msg) => {

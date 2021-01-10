@@ -23,7 +23,6 @@ export default function Post() {
   useEffect(() => {
     AsyncStorage.getItem("credentials").then((res) => {
       res = JSON.parse(res);
-      // console.log(res[0].mobile);
       setPhone(res[0].mobile);
     });
   }, []);
@@ -40,7 +39,7 @@ export default function Post() {
     };
 
     axios({
-      url: `${config.API}/posts/upload`,
+      url: `${config.URI}/posts/upload`,
       method: "POST",
       data: payload,
     })
@@ -53,8 +52,9 @@ export default function Post() {
       });
   };
 
-  const onImgAdded = (url) => {
-    setProduct({ ...product, image: url });
+  const onImgAdded = (res) => {
+    console.log(res);
+    setProduct({ ...product, image: res });
   };
 
   return (

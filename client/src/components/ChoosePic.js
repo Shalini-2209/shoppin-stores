@@ -2,9 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button, Image, View, Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import firebase from "../database/Firebase";
+import "firebase/storage";
 import Constants from "expo-constants";
 
 export default function ProductImg(props) {
+  //Initialize firebase
+
   const dummyImg =
     "https://www.lankabangla.com/wp-content/uploads/2019/08/no_image_png_935227.png";
   const [image, setImage] = useState(dummyImg);
@@ -30,14 +34,33 @@ export default function ProductImg(props) {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
-      setImage(result.uri);
-      if (result.uri != dummyImg) {
-        props.onImgAdded(result.uri);
-      } else props.onImgAdded(dummyImg);
+      let fileName = new Date().getTime();
+      uploadImg(result.uri, fileName).then(() => {
+        firebase
+          .storage()
+          .ref()
+          .child("images/" + fileName)
+          .getDownloadURL()
+          .then((url) => {
+            setImage(url);
+            console.log("url:" + url);
+            props.onImgAdded(url);
+          });
+        console.log("Success");
+      }).catch = (err) => {
+        console.log("Error in uploading to firebase", err);
+      };
     }
+  };
+  const uploadImg = async (uri, fileName) => {
+    let response = await fetch(uri);
+    let blob = await response.blob();
+    let ref = firebase
+      .storage()
+      .ref()
+      .child("images/" + fileName);
+    return ref.put(blob);
   };
 
   return (

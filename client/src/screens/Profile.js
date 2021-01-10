@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -36,7 +37,7 @@ export default function ProfileScreen() {
 
   const getData = (num) => {
     axios({
-      url: `${config.API}/profile/${num}`,
+      url: `${config.URI}/profile/${num}`,
     })
       .then((res) => {
         console.log("Profile Page has been loaded!");
@@ -50,7 +51,7 @@ export default function ProfileScreen() {
 
   const getPosts = (num) => {
     axios({
-      url: `${config.API}/posts/users${num}`,
+      url: `${config.URI}/posts/users${num}`,
     })
       .then((res) => {
         console.log("Posts has been loaded!");

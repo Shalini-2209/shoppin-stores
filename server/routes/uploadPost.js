@@ -2,21 +2,19 @@ const express = require("express");
 const Post = require("../database/models/PostModel");
 const router = express.Router();
 
-router
-  .route("/upload")
+const app = express();
 
-  .post((req, res) => {
-    let data = req.body;
-    let newPost = new Post(data);
+router.route("/upload").post((req, res) => {
+  let newPost = new Post(req.body);
 
-    newPost.save((error) => {
-      if (error) {
-        res.status(500).json({ msg: "Error appeared while saving data." });
-        return;
-      }
-      res.send(JSON.stringify(req.body) + "Data received successfully.");
-    });
+  newPost.save((error) => {
+    if (error) {
+      return res.status(500).json({ msg: "Error appeared while saving data." });
+    }
+
+    res.send(JSON.stringify(req.body) + "Data received successfully.");
   });
+});
 
 router.route("/").get((req, res) => {
   Post.find({})
