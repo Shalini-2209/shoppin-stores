@@ -27,6 +27,18 @@ router.route("/").get((req, res) => {
     });
 });
 
+router.route("/store:val").get((req, res) => {
+  const store = req.params.val;
+  Post.find({ store })
+
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log("Error" + err);
+    });
+});
+
 router.route("/users:phone").get((req, res) => {
   const mobile = parseInt(req.params.phone);
   Post.find({ mobile })

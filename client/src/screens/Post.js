@@ -17,7 +17,7 @@ import TopBar from "../components/TopBar";
 export default function Post() {
   const initialState = { name: "", price: "", store: "", image: "" };
   const [product, setProduct] = useState(initialState);
-  const [flag, setFlag] = useState(false);
+
   const [phone, setPhone] = useState("");
 
   useEffect(() => {
@@ -97,15 +97,7 @@ export default function Post() {
             <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
               <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.saveButton}
-              onPress={() => setFlag(!flag)}
-            >
-              <Text style={styles.saveButtonText}>View </Text>
-            </TouchableOpacity>
           </View>
-
-          {flag && <Content />}
         </ScrollView>
       </View>
     </>

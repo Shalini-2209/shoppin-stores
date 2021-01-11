@@ -44,7 +44,7 @@ export default function Main({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5FCFF",
+    backgroundColor: "white",
     paddingTop: 85,
   },
   buttonWrapper: {
@@ -71,5 +71,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
-//SCAN?tunneel sry

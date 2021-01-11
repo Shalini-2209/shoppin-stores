@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // paddingTop: 5,
-    backgroundColor: "#F5FCFF",
     justifyContent: "center",
   },
 

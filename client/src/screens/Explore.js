@@ -2,6 +2,7 @@ import * as React from "react";
 import { Searchbar } from "react-native-paper";
 import { View, StyleSheet, ScrollView } from "react-native";
 import TopBar from "../components/TopBar";
+import Store from "./Store";
 import config from "../../config";
 import { AntDesign } from "@expo/vector-icons";
 import { Card } from "react-native-paper";
@@ -10,8 +11,13 @@ import axios from "axios";
 export default function ExploreScreen({ navigation }) {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [storesList, setStoresList] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [temp, setTemp] = React.useState("");
 
-  const onChangeSearch = (query) => setSearchQuery(query);
+  const onChangeSearch = (query) => {
+    setOpen(false);
+    setSearchQuery(query);
+  };
 
   const fetchStores = () => {
     axios({
@@ -23,6 +29,7 @@ export default function ExploreScreen({ navigation }) {
         if (data.length > 0) {
           setStoresList(data);
         }
+        setTemp(searchQuery);
         setSearchQuery("");
       })
       .catch(() => {
@@ -35,7 +42,8 @@ export default function ExploreScreen({ navigation }) {
   );
 
   const openProfile = () => {
-    navigation.navigate("Store");
+    setOpen(true);
+    setStoresList([]);
   };
 
   return (
@@ -50,6 +58,8 @@ export default function ExploreScreen({ navigation }) {
         value={searchQuery}
         style={styles.explore}
       />
+
+      {open && <Store companyName={temp} />}
 
       {storesList && (
         <ScrollView>

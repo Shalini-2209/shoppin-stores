@@ -12,10 +12,7 @@ export default function TopBar(props) {
   }
   return (
     <View style={{ height: size }}>
-      <View
-        // position="static"
-        style={styles.container}
-      >
+      <View style={styles.container}>
         <MaterialCommunityIcons name="menu" size={26} color="#db7093" />
 
         <Text style={styles.textInput}> {props.name}</Text>
