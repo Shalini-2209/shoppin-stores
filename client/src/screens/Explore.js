@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Searchbar } from "react-native-paper";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import TopBar from "../components/TopBar";
 import Store from "./Store";
 import config from "../../config";
@@ -17,6 +17,7 @@ export default function ExploreScreen({ navigation }) {
   const onChangeSearch = (query) => {
     setOpen(false);
     setSearchQuery(query);
+    setStoresList([]);
   };
 
   const fetchStores = () => {
@@ -39,6 +40,11 @@ export default function ExploreScreen({ navigation }) {
 
   const LeftContent = () => (
     <AntDesign name="profile" size={24} color="black" />
+  );
+  const RightContent = () => (
+    <TouchableOpacity onPress={() => setStoresList([])}>
+      <AntDesign name="close" size={24} color="grey" />
+    </TouchableOpacity>
   );
 
   const openProfile = () => {
@@ -69,6 +75,7 @@ export default function ExploreScreen({ navigation }) {
                 title={item.companyName}
                 subtitle={item.slogan}
                 left={LeftContent}
+                right={RightContent}
               />
             </Card>
           ))}

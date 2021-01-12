@@ -27,9 +27,7 @@ export default function Post() {
     });
   }, []);
 
-  const handleSave = (e) => {
-    e.preventDefault();
-
+  const handleSave = () => {
     const payload = {
       name: product.name,
       price: product.price,
@@ -37,7 +35,6 @@ export default function Post() {
       mobile: phone,
       store: product.store,
     };
-
     axios({
       url: `${config.URI}/posts/upload`,
       method: "POST",
@@ -53,7 +50,7 @@ export default function Post() {
   };
 
   const onImgAdded = (res) => {
-    console.log(res);
+    // console.log(res);
     setProduct({ ...product, image: res });
   };
 

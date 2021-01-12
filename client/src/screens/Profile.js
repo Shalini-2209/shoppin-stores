@@ -3,6 +3,7 @@ import { ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { confirmAlert } from "react-confirm-alert";
 import { Card, Paragraph } from "react-native-paper";
 import config from "../../config";
 import {
@@ -19,7 +20,7 @@ import TopBar from "../components/TopBar";
 export default function ProfileScreen() {
   const [profile, setProfile] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState(0);
+  const [user, setUser] = useState("");
   let load = false;
 
   if (posts.length == 0) {
@@ -63,17 +64,32 @@ export default function ProfileScreen() {
       });
   };
 
+  const confirmDelete = () => {
+    confirmAlert({
+      title: "Confirm Deletion",
+      message: "Are you sure to do this?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => alert("Click Yes"),
+        },
+        {
+          label: "No",
+          onClick: () => alert("Click No"),
+        },
+      ],
+    });
+  };
+
+  const deletePost = () => {
+    confirmDelete();
+  };
+
   return (
     <>
       <View>
         <TopBar name="Profile" />
       </View>
-
-      {load && (
-        <View style={styles.loading}>
-          <ActivityIndicator size="large" color="#db7093" />
-        </View>
-      )}
 
       <ScrollView>
         <View style={styles.containerOne}>
@@ -145,6 +161,11 @@ export default function ProfileScreen() {
         </View>
 
         <View style={styles.containerTwo}>
+          {load && (
+            <View style={styles.loading}>
+              <ActivityIndicator size="large" color="#db7093" />
+            </View>
+          )}
           {posts.map((item) => (
             <Card key={item._id}>
               <Card.Cover source={{ uri: item.image }} style={styles.img} />
@@ -177,7 +198,7 @@ const styles = StyleSheet.create({
   containerOne: {
     flex: 1,
     paddingTop: 45,
-    // backgroundColor: "#F5FCFF",
+    backgroundColor: "white",
   },
   containerTwo: {
     flex: 1,
@@ -185,9 +206,14 @@ const styles = StyleSheet.create({
     paddingTop: 45,
     paddingLeft: 5,
     flexWrap: "wrap",
-    // backgroundColor: "#F5FCFF",
+    backgroundColor: "white",
   },
-
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+  },
   proPic: {
     width: 100,
     height: 100,
@@ -208,7 +234,6 @@ const styles = StyleSheet.create({
 
   img: {
     width: 200,
-    borderWidth: 2,
     height: 150,
   },
 });
