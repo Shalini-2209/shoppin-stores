@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { confirmAlert } from "react-confirm-alert";
 import { Card, Paragraph } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native";
 import config from "../../config";
 import {
   View,
@@ -21,28 +22,11 @@ import TopBar from "../components/TopBar";
 export default function ProfileScreen() {
   const [profile, setProfile] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState("");
-  const [large, setLarge] = useState(false);
   let load = false;
-
-  const [visible, setVisible] = React.useState(false);
-
-  const openMenu = () => setVisible(true);
-
-  const closeMenu = () => setVisible(false);
 
   if (posts.length == 0 && profile.length == 0) {
     load = true;
   }
-
-  useEffect(() => {
-    AsyncStorage.getItem("credentials").then((res) => {
-      res = JSON.parse(res);
-      setUser(res[0].mobile);
-      getData(res[0].mobile);
-      getPosts(res[0].mobile);
-    });
-  }, []);
 
   const getData = (num) => {
     axios({
@@ -72,26 +56,17 @@ export default function ProfileScreen() {
       });
   };
 
-  const confirmDelete = () => {
-    confirmAlert({
-      title: "Confirm Deletion",
-      message: "Are you sure to do this?",
-      buttons: [
-        {
-          label: "Yes",
-          onClick: () => alert("Click Yes"),
-        },
-        {
-          label: "No",
-          onClick: () => alert("Click No"),
-        },
-      ],
-    });
-  };
+  useFocusEffect(
+    useCallback(() => {
+      AsyncStorage.getItem("credentials").then((res) => {
+        res = JSON.parse(res);
+        getData(res[0].mobile);
+        getPosts(res[0].mobile);
+      });
 
-  const deletePost = () => {
-    confirmDelete();
-  };
+      return () => console.log("Stopped Fetching");
+    }, [])
+  );
 
   return (
     <>
@@ -200,14 +175,22 @@ export default function ProfileScreen() {
                     color="black"
                   />
                 </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.deleteIcon}
+                  onPress={() =>
+                    confirm("Are you sure about deleting this post?")
+                  }
+                >
+                  <MaterialCommunityIcons
+                    name="delete"
+                    size={24}
+                    color="black"
+                  />
+                </TouchableOpacity>
               </Card.Content>
             </Card>
           ))}
         </View>
-
-        {/* {large && (
-        
-        )} */}
       </ScrollView>
     </>
   );
@@ -222,7 +205,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     paddingTop: 45,
-    paddingLeft: 5,
+    paddingLeft: 3,
     flexWrap: "wrap",
   },
 
@@ -234,8 +217,13 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    paddingLeft: 105,
+    paddingLeft: 80,
     paddingTop: 5,
+  },
+
+  deleteIcon: {
+    paddingTop: 5,
+    paddingLeft: 5,
   },
 
   info: {

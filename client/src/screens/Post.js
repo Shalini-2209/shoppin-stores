@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -43,7 +43,7 @@ export default function Post({ navigation }) {
       .then(() => {
         console.log("Added a new product.");
         setProduct(initialState);
-        navigation.navigate("Feed");
+        navigation.navigate("Profile");
       })
       .catch((error) => {
         console.log("Internal server error.", error);
