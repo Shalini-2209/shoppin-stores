@@ -15,15 +15,23 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
+import { Menu, Divider, Provider } from "react-native-paper";
 import TopBar from "../components/TopBar";
 
 export default function ProfileScreen() {
   const [profile, setProfile] = useState([]);
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState("");
+  const [large, setLarge] = useState(false);
   let load = false;
 
-  if (posts.length == 0) {
+  const [visible, setVisible] = React.useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
+
+  if (posts.length == 0 && profile.length == 0) {
     load = true;
   }
 
@@ -91,7 +99,19 @@ export default function ProfileScreen() {
         <TopBar name="Profile" />
       </View>
 
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: "white" }}>
+        {load && (
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              alignContent: "center",
+              flex: 1,
+            }}
+          >
+            <ActivityIndicator size="large" color="#db7093" />
+          </View>
+        )}
         <View style={styles.containerOne}>
           {profile.map((item) => (
             <View key={item._id}>
@@ -161,13 +181,8 @@ export default function ProfileScreen() {
         </View>
 
         <View style={styles.containerTwo}>
-          {load && (
-            <View style={styles.loading}>
-              <ActivityIndicator size="large" color="#db7093" />
-            </View>
-          )}
           {posts.map((item) => (
-            <Card key={item._id}>
+            <Card key={item._id} onPress={() => setLarge(true)}>
               <Card.Cover source={{ uri: item.image }} style={styles.img} />
               <Card.Content style={{ flexDirection: "row" }}>
                 <Paragraph style={{ paddingTop: 5 }}>
@@ -189,6 +204,10 @@ export default function ProfileScreen() {
             </Card>
           ))}
         </View>
+
+        {/* {large && (
+        
+        )} */}
       </ScrollView>
     </>
   );
@@ -198,7 +217,6 @@ const styles = StyleSheet.create({
   containerOne: {
     flex: 1,
     paddingTop: 45,
-    backgroundColor: "white",
   },
   containerTwo: {
     flex: 1,
@@ -206,14 +224,8 @@ const styles = StyleSheet.create({
     paddingTop: 45,
     paddingLeft: 5,
     flexWrap: "wrap",
-    backgroundColor: "white",
   },
-  loading: {
-    flex: 1,
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-  },
+
   proPic: {
     width: 100,
     height: 100,

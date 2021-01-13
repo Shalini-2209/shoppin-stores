@@ -14,7 +14,7 @@ import config from "../../config";
 import ProductImg from "../components/ChoosePic";
 import TopBar from "../components/TopBar";
 
-export default function Post() {
+export default function Post({ navigation }) {
   const initialState = { name: "", price: "", store: "", image: "" };
   const [product, setProduct] = useState(initialState);
 
@@ -43,6 +43,7 @@ export default function Post() {
       .then(() => {
         console.log("Added a new product.");
         setProduct(initialState);
+        navigation.navigate("Feed");
       })
       .catch((error) => {
         console.log("Internal server error.", error);

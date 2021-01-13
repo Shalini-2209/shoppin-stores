@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   icon: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF",
+    backgroundColor: "white",
     // marginTop: "10%",
     marginBottom: "10%",
   },

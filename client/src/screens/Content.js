@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import axios from "axios";
 import { Card } from "react-native-paper";
 import {
@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
 import TopBar from "../components/TopBar";
 import config from "../../config";
 
@@ -22,10 +23,6 @@ export default function Content() {
   if (content.length == 0) {
     load = true;
   }
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const getData = () => {
     axios({
@@ -43,6 +40,14 @@ export default function Content() {
 
   const LeftContent = () => (
     <AntDesign name="rightcircle" size={26} color="black" />
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      getData();
+
+      return () => console.log("Stopped Fetching");
+    }, [])
   );
 
   return (

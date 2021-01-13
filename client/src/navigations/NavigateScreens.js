@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SwitchTabs from "../navigations/SwitchTabs";
 import Main from "../screens/Main";
+import Content from "../screens/Content";
 
 export default function NavigateScreens() {
   const Stack = createStackNavigator();
@@ -11,6 +12,7 @@ export default function NavigateScreens() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="SwitchTabs" component={SwitchTabs} />
+        <Stack.Screen name="Feed" component={Content} />
       </Stack.Navigator>
     </NavigationContainer>
   );

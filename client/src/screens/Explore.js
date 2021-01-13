@@ -42,7 +42,10 @@ export default function ExploreScreen({ navigation }) {
     <AntDesign name="profile" size={24} color="black" />
   );
   const RightContent = () => (
-    <TouchableOpacity onPress={() => setStoresList([])}>
+    <TouchableOpacity
+      onPress={() => setStoresList([])}
+      style={{ paddingRight: 20 }}
+    >
       <AntDesign name="close" size={24} color="grey" />
     </TouchableOpacity>
   );
