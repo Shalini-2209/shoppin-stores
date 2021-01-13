@@ -3,7 +3,6 @@ import { ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { confirmAlert } from "react-confirm-alert";
 import { Card, Paragraph } from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
 import config from "../../config";
@@ -16,12 +15,12 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
-import { Menu, Divider, Provider } from "react-native-paper";
 import TopBar from "../components/TopBar";
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }) {
   const [profile, setProfile] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [prdt, setPrdt] = useState("");
   let load = false;
 
   if (posts.length == 0 && profile.length == 0) {
@@ -50,6 +49,19 @@ export default function ProfileScreen() {
         console.log("Posts has been loaded!");
         const data = res.data;
         setPosts(data);
+      })
+      .catch(() => {
+        console.log("Error in retriving data..");
+      });
+  };
+
+  const deletePost = (id) => {
+    axios({
+      url: `${config.URI}/posts/delete${id}`,
+    })
+      .then((res) => {
+        alert("Post deleted successfully");
+        navigation.navigate("Feed");
       })
       .catch(() => {
         console.log("Error in retriving data..");
@@ -177,9 +189,7 @@ export default function ProfileScreen() {
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.deleteIcon}
-                  onPress={() =>
-                    confirm("Are you sure about deleting this post?")
-                  }
+                  onPress={() => deletePost(item._id)}
                 >
                   <MaterialCommunityIcons
                     name="delete"

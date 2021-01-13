@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SwitchTabs from "../navigations/SwitchTabs";
 import Main from "../screens/Main";
 import ProfileScreen from "../screens/Profile";
+import Content from "../screens/Content";
 
 export default function NavigateScreens() {
   const Stack = createStackNavigator();
@@ -13,6 +14,7 @@ export default function NavigateScreens() {
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="SwitchTabs" component={SwitchTabs} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Feed" component={Content} />
       </Stack.Navigator>
     </NavigationContainer>
   );
