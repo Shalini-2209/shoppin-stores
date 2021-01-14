@@ -6,21 +6,25 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   Text,
   ActivityIndicator,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import TopBar from "../components/TopBar";
 import config from "../../config";
+import Store from "./Store";
 
 export const FeedContext = React.createContext();
 
 export default function Content() {
   const [content, setContent] = useState([]);
+  const [temp, setTemp] = useState("");
+  const [open, setOpen] = useState(false);
   let load = false;
 
-  if (content.length == 0) {
+  if (content.length == 0 && !open) {
     load = true;
   }
 
@@ -42,6 +46,17 @@ export default function Content() {
     <AntDesign name="rightcircle" size={26} color="black" />
   );
 
+  const openProfile = (store) => {
+    setOpen(true);
+    setTemp(store);
+    setContent([]);
+  };
+
+  const closeProfile = () => {
+    setOpen(false);
+    getData();
+  };
+
   useFocusEffect(
     useCallback(() => {
       getData();
@@ -61,9 +76,21 @@ export default function Content() {
           <ActivityIndicator size="large" color="#db7093" />
         </View>
       )}
+
+      {open && (
+        <>
+          <TouchableOpacity
+            style={{ alignItems: "flex-end", marginRight: 3 }}
+            onPress={closeProfile}
+          >
+            <MaterialCommunityIcons name="close" size={24} color="black" />
+          </TouchableOpacity>
+          <Store companyName={temp} />
+        </>
+      )}
       <ScrollView>
         {content.map((item) => (
-          <Card key={item._id}>
+          <Card key={item._id} onPress={() => openProfile(item.store)}>
             <Card.Title
               title={item.store}
               subtitle={item.name}
