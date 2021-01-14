@@ -85,20 +85,12 @@ export default function ProfileScreen({ navigation }) {
       <View>
         <TopBar name="Profile" />
       </View>
-
+      {load && (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" color="#db7093" />
+        </View>
+      )}
       <ScrollView style={{ backgroundColor: "white" }}>
-        {load && (
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              alignContent: "center",
-              flex: 1,
-            }}
-          >
-            <ActivityIndicator size="large" color="#db7093" />
-          </View>
-        )}
         <View style={styles.containerOne}>
           {profile.map((item) => (
             <View key={item._id}>
@@ -240,6 +232,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     paddingLeft: 5,
+  },
+
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
   },
 
   img: {

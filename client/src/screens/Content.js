@@ -80,7 +80,7 @@ export default function Content() {
       {open && (
         <>
           <TouchableOpacity
-            style={{ alignItems: "flex-end", marginRight: 3 }}
+            style={{ alignItems: "flex-end", marginRight: 5 }}
             onPress={closeProfile}
           >
             <MaterialCommunityIcons name="close" size={24} color="black" />
@@ -96,10 +96,7 @@ export default function Content() {
               subtitle={item.name}
               left={LeftContent}
             />
-            <Card.Cover
-              source={{ uri: item.image }}
-              style={{ resizeMode: "contain" }}
-            />
+            <Card.Cover source={{ uri: item.image }} />
           </Card>
         ))}
       </ScrollView>
