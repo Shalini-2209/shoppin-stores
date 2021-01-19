@@ -18,6 +18,7 @@ router.route("/upload").post((req, res) => {
 
 router.route("/").get((req, res) => {
   Post.find({})
+    .sort({ date: -1 })
     .then((data) => {
       console.log("Data retrieved successfully ");
       res.json(data);

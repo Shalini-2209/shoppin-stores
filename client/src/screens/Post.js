@@ -62,6 +62,7 @@ export default function Post({ navigation }) {
       </View>
       <View style={styles.container}>
         <ScrollView>
+          ''{" "}
           <View>
             <TextInput
               maxLength={20}
@@ -86,11 +87,9 @@ export default function Post({ navigation }) {
               onChangeText={(text) => setProduct({ ...product, store: text })}
             />
           </View>
-
           <View>
             <ProductImg onImgAdded={onImgAdded} />
           </View>
-
           <View>
             <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
               <Text style={styles.saveButtonText}>Save</Text>
