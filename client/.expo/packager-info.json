@@ -2,9 +2,9 @@
   "expoServerPort": 19000,
   "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://nk-82m.shalini-n.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.nk-82m.shalini-n.client.exp.direct",
+  "ngrokPid": 18320,
   "webpackServerPort": 19006,
   "devToolsPort": 19002
 }

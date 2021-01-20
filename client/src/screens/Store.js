@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Image,
+  Linking,
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
@@ -20,6 +21,23 @@ export default function Store(props) {
     getInfo();
     getPosts();
   }, []);
+
+  const initializeWhatsApp = (id) => {
+    let mobileNumber = profile[0].mobile;
+    let url =
+      "whatsapp://send?text=" +
+      "I am interested in buying product id: " +
+      id +
+      "&phone=91" +
+      mobileNumber;
+    Linking.openURL(url)
+      .then((data) => {
+        console.log("WhatsApp Opened");
+      })
+      .catch(() => {
+        alert("Make sure Whatsapp installed on your device");
+      });
+  };
 
   const getInfo = () => {
     axios({
@@ -132,12 +150,10 @@ export default function Store(props) {
                 </Paragraph>
                 <TouchableOpacity
                   style={styles.icon}
-                  onPress={() =>
-                    alert("Product Id to be noted: " + `${item._id}`)
-                  }
+                  onPress={() => initializeWhatsApp(`${item._id}`)}
                 >
                   <MaterialCommunityIcons
-                    name="eye-plus"
+                    name="cart-arrow-down"
                     size={24}
                     color="black"
                   />
