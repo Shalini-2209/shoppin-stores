@@ -51,7 +51,6 @@ export default function Post({ navigation }) {
   };
 
   const onImgAdded = (res) => {
-    // console.log(res);
     setProduct({ ...product, image: res });
   };
 
@@ -62,7 +61,6 @@ export default function Post({ navigation }) {
       </View>
       <View style={styles.container}>
         <ScrollView>
-          ''{" "}
           <View>
             <TextInput
               maxLength={20}
