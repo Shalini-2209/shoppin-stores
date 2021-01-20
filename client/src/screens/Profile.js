@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Clipboard } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -20,12 +20,18 @@ import TopBar from "../components/TopBar";
 export default function ProfileScreen({ navigation }) {
   const [profile, setProfile] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [prdt, setPrdt] = useState("");
+
   let load = false;
 
   if (posts.length == 0 && profile.length == 0) {
     load = true;
   }
+
+  const copyProductId = (id) => {
+    if (Clipboard.setString("dfd")) {
+      alert("Product Id : " + id + " copied!");
+    }
+  };
 
   const getData = (num) => {
     axios({
@@ -161,7 +167,7 @@ export default function ProfileScreen({ navigation }) {
 
         <View style={styles.containerTwo}>
           {posts.map((item) => (
-            <Card key={item._id} onPress={() => setLarge(true)}>
+            <Card key={item._id}>
               <Card.Cover source={{ uri: item.image }} style={styles.img} />
               <Card.Content style={{ flexDirection: "row" }}>
                 <Paragraph style={{ paddingTop: 5 }}>
@@ -169,12 +175,10 @@ export default function ProfileScreen({ navigation }) {
                 </Paragraph>
                 <TouchableOpacity
                   style={styles.icon}
-                  onPress={() =>
-                    alert("Product Id to be noted: " + `${item._id}`)
-                  }
+                  onPress={() => copyProductId(`${item._id}`)}
                 >
                   <MaterialCommunityIcons
-                    name="eye-plus"
+                    name="content-copy"
                     size={24}
                     color="black"
                   />
