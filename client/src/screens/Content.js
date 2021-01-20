@@ -59,6 +59,7 @@ export default function Content() {
 
   useFocusEffect(
     useCallback(() => {
+      closeProfile();
       getData();
 
       return () => console.log("Stopped Fetching");
@@ -80,7 +81,11 @@ export default function Content() {
       {open && (
         <>
           <TouchableOpacity
-            style={{ alignItems: "flex-end", marginRight: 5 }}
+            style={{
+              alignItems: "flex-end",
+              marginRight: 5,
+              paddingTop: 5,
+            }}
             onPress={closeProfile}
           >
             <MaterialCommunityIcons name="close" size={24} color="black" />
@@ -108,7 +113,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 65,
-    backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
   },

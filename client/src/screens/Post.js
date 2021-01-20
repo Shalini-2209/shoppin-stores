@@ -16,6 +16,7 @@ import TopBar from "../components/TopBar";
 
 export default function Post({ navigation }) {
   const initialState = { name: "", price: "", store: "", image: "" };
+
   const [product, setProduct] = useState(initialState);
 
   const [phone, setPhone] = useState("");
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 65,
-    backgroundColor: "#F5FCFF",
+    // backgroundColor: "#F5FCFF",
   },
   header: {
     fontSize: 25,

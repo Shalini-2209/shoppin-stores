@@ -120,7 +120,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 25,
-    backgroundColor: "white",
   },
 
   textInput: {
@@ -132,7 +131,7 @@ const styles = StyleSheet.create({
   icon: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
+
     // marginTop: "10%",
     marginBottom: "10%",
   },
