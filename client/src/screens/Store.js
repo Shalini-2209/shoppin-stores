@@ -199,7 +199,8 @@ const styles = StyleSheet.create({
   },
 
   img: {
-    width: 200,
+    // width: 200,
+    resizeMode: "contain",
     borderWidth: 2,
     height: 150,
   },

@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
   },
 
   img: {
-    width: 200,
+    resizeMode: "contain",
     height: 150,
   },
 });

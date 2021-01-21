@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Image, View, Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -6,9 +6,7 @@ import firebase from "../database/Firebase";
 import "firebase/storage";
 import Constants from "expo-constants";
 
-export default function ProductImg(props) {
-  //Initialize firebase
-
+function ProductImg(props) {
   const dummyImg =
     "https://www.lankabangla.com/wp-content/uploads/2019/08/no_image_png_935227.png";
   const [image, setImage] = useState(dummyImg);
@@ -84,3 +82,5 @@ export default function ProductImg(props) {
     </>
   );
 }
+
+export default ProductImg;

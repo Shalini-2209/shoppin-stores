@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
   store: { type: String, required: true },
 
   date: {
-    type: String,
+    type: Date,
     default: Date.now(),
   },
 

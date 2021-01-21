@@ -9,24 +9,38 @@ import {
 } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Content from "./Content";
 import config from "../../config";
 import ProductImg from "../components/ChoosePic";
 import TopBar from "../components/TopBar";
 
 export default function Post({ navigation }) {
-  const initialState = { name: "", price: "", store: "", image: "" };
+  const initialState = { name: "", price: "", image: "" };
 
   const [product, setProduct] = useState(initialState);
-
   const [phone, setPhone] = useState("");
+  const [store, setStore] = useState("");
 
   useEffect(() => {
     AsyncStorage.getItem("credentials").then((res) => {
       res = JSON.parse(res);
       setPhone(res[0].mobile);
+      getStore(res[0].mobile);
     });
   }, []);
+
+  const getStore = (num) => {
+    axios({
+      url: `${config.URI}/profile/${num}`,
+    })
+      .then((res) => {
+        console.log("Store retrieved!");
+        const data = res.data;
+        setStore(data[0].companyName);
+      })
+      .catch(() => {
+        console.log("Error in retriving store..");
+      });
+  };
 
   const handleSave = () => {
     const payload = {
@@ -34,7 +48,7 @@ export default function Post({ navigation }) {
       price: product.price,
       image: product.image,
       mobile: phone,
-      store: product.store,
+      store: store,
     };
     axios({
       url: `${config.URI}/posts/upload`,
@@ -77,14 +91,6 @@ export default function Post({ navigation }) {
               style={styles.inputContainer}
               onChangeText={(text) => setProduct({ ...product, price: text })}
             />
-
-            <TextInput
-              maxLength={20}
-              placeholder="Enter store"
-              value={product.store}
-              style={styles.inputContainer}
-              onChangeText={(text) => setProduct({ ...product, store: text })}
-            />
           </View>
           <View>
             <ProductImg onImgAdded={onImgAdded} />
@@ -104,7 +110,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 65,
-    // backgroundColor: "#F5FCFF",
   },
   header: {
     fontSize: 25,
