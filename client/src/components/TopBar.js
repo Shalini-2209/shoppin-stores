@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import { Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import NewProfile from "../screens/CreateStore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View } from "react-native";
+import { LoginContext } from "../components/LoginContext";
+import Main from "../screens/Main";
 
 export default function TopBar(props) {
   const [create, setCreate] = useState(false);
+  const [login, setLogin] = React.useContext(LoginContext);
+
   let size = "auto";
-  if (create) {
-    size = "100%";
-  }
+
+  const logMeOut = () => {
+    AsyncStorage.clear();
+    setLogin(false);
+  };
   return (
     <View style={{ height: size }}>
       <View style={styles.container}>
@@ -17,14 +24,10 @@ export default function TopBar(props) {
 
         <Text style={styles.textInput}> {props.name}</Text>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setCreate(!create)}
-        >
-          <Text style={{ color: "#e28ca8" }}>CREATE STORE</Text>
+        <TouchableOpacity onPress={logMeOut} style={styles.button}>
+          <Text style={{ color: "#e28ca8" }}>Log out</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView>{create && <NewProfile />}</ScrollView>
     </View>
   );
 }
@@ -50,5 +53,6 @@ const styles = StyleSheet.create({
     padding: 5,
     borderWidth: 3,
     borderColor: "#db7093",
+    flexDirection: "row",
   },
 });

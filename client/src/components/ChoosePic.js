@@ -24,6 +24,10 @@ function ProductImg(props) {
     })();
   }, []);
 
+  useEffect(() => {
+    setImage(dummyImg);
+  }, [props.posted]);
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,

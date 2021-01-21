@@ -19,6 +19,7 @@ export default function Post({ navigation }) {
   const [product, setProduct] = useState(initialState);
   const [phone, setPhone] = useState("");
   const [store, setStore] = useState("");
+  const [posted, setPosted] = useState(false);
 
   useEffect(() => {
     AsyncStorage.getItem("credentials").then((res) => {
@@ -58,6 +59,7 @@ export default function Post({ navigation }) {
       .then(() => {
         console.log("Added a new product.");
         setProduct(initialState);
+        setPosted(!posted);
         navigation.navigate("Profile");
       })
       .catch((error) => {
@@ -93,7 +95,7 @@ export default function Post({ navigation }) {
             />
           </View>
           <View>
-            <ProductImg onImgAdded={onImgAdded} />
+            <ProductImg onImgAdded={onImgAdded} posted={posted} />
           </View>
           <View>
             <TouchableOpacity style={styles.saveButton} onPress={handleSave}>

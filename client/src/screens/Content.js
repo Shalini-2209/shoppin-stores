@@ -101,7 +101,10 @@ export default function Content() {
               subtitle={item.name}
               left={LeftContent}
             />
-            <Card.Cover source={{ uri: item.image }} />
+            <Card.Cover
+              source={{ uri: item.image }}
+              style={{ resizeMode: "contain" }}
+            />
           </Card>
         ))}
       </ScrollView>

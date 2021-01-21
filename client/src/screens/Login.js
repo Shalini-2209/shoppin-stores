@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import { LoginContext } from "../components/LoginContext";
 import config from "../../config";
 
 export default function Login(props) {
@@ -17,9 +18,10 @@ export default function Login(props) {
   };
   const [log, setLog] = useState(initialState);
   const [form, setForm] = useState(true);
+  const [login, setLogin] = React.useContext(LoginContext);
 
   useEffect(() => {
-    AsyncStorage.clear();
+    // AsyncStorage.clear();
     AsyncStorage.getItem("credentials").then((res) => {
       if (res) {
         setForm(false);
@@ -41,6 +43,7 @@ export default function Login(props) {
         if (msg.data.length == 1) {
           AsyncStorage.setItem("credentials", JSON.stringify(msg.data));
           setForm(false);
+          setLogin(true);
           props.navigation.navigate("SwitchTabs");
         } else {
           alert("Invalid user!");
