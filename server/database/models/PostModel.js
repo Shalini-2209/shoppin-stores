@@ -1,4 +1,3 @@
-const { Mongoose } = require("mongoose");
 const schema = require("../schemas/PostSchema");
 const mongoose = require("mongoose");
 
