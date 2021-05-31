@@ -1,1 +1,0 @@
-{"ast":null,"code":"var URI = \"https://insta-stores.herokuapp.com/\";","map":{"version":3,"sources":["D:/shoppin-stores/client/config.js"],"names":["URI"],"mappings":"AAAA,IAAMA,GAAG,GAAG,qCAAZ","sourcesContent":["const URI = \"https://insta-stores.herokuapp.com/\"\r\n"]},"metadata":{},"sourceType":"script"}

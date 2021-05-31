@@ -1,1 +1,0 @@
-{"ast":null,"code":"export var LoginContext = React.createContext();","map":{"version":3,"sources":["D:/mobile-app/client/src/components/LoginContext.js"],"names":["LoginContext","React","createContext"],"mappings":"AAAA,OAAO,IAAMA,YAAY,GAAGC,KAAK,CAACC,aAAN,EAArB","sourcesContent":["export const LoginContext = React.createContext();\r\n"]},"metadata":{},"sourceType":"module"}

@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default {\n  API: \"http://insta-stores.herokuapp.com\"\n};","map":{"version":3,"sources":["D:/mobile-app/client/config.js"],"names":["API"],"mappings":"AAEA,eAAe;AACbA,EAAAA,GAAG;AADU,CAAf","sourcesContent":["import { API } from \"@env\";\r\n\r\nexport default {\r\n  API,\r\n};\r\n"]},"metadata":{},"sourceType":"module"}
