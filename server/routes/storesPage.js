@@ -23,6 +23,17 @@ router
     });
   });
 
+router.route("/stores").get((req, res) => {
+  Stores.find()
+
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log("Error" + err);
+    });
+});
+
 router.route("/stores:val").get((req, res) => {
   const companyName = req.params.val;
   Stores.find({ companyName })

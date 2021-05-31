@@ -4,6 +4,7 @@ import {
   Text,
   View,
   TextInput,
+  ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -18,6 +19,7 @@ export default function Login(props) {
   };
   const [log, setLog] = useState(initialState);
   const [form, setForm] = useState(true);
+  const [load, setLoad] = useState(false);
   const [login, setLogin] = React.useContext(LoginContext);
 
   useEffect(() => {
@@ -34,6 +36,8 @@ export default function Login(props) {
       mobile: log.mobile,
       password: log.password,
     };
+    setForm(false);
+    setLoad(true);
 
     axios({
       method: "post",
@@ -43,7 +47,7 @@ export default function Login(props) {
       .then((msg) => {
         if (msg.data.length == 1) {
           AsyncStorage.setItem("credentials", JSON.stringify(msg.data));
-          setForm(false);
+
           setLogin(true);
           props.navigation.navigate("SwitchTabs");
         } else {
@@ -63,6 +67,7 @@ export default function Login(props) {
             style={styles.textInput}
             maxLength={20}
             value={log.mobile}
+            keyboardType="numeric"
             placeholder="Mobile"
             onChangeText={(text) => setLog({ ...log, mobile: text })}
           />
@@ -84,6 +89,12 @@ export default function Login(props) {
           >
             <Text style={styles.saveButtonText}>Log me in!</Text>
           </TouchableOpacity>
+        </View>
+      )}
+
+      {load && (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" color="#db7093" />
         </View>
       )}
     </View>
@@ -112,6 +123,12 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
     marginTop: 20,
+  },
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
   },
   saveButtonText: {
     color: "#db7093",
