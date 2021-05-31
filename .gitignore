@@ -9,9 +9,12 @@ npm-debug.*
 *.orig.*
 web-build/
 node_modules
+.vscode
+database
 # macOS
 .DS_Store
 
 
-config.js
 
+config.js
+.env

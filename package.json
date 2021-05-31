@@ -2,7 +2,7 @@
   "name": "client-server",
   "version": "1.0.0",
   "description": "",
-  "main": "client/src/screens/Login.js",
+  "main": "index.js",
   "scripts": {
     "server": "npm run devStart --prefix server",
     "client": "npm start --prefix client",
