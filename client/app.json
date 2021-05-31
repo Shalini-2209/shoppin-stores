@@ -20,7 +20,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.instastores.instastores",
+      "package": "com.shalini_n.clientserver",
       "versionCode": 3,
       "userInterfaceStyle": "dark",
       "adaptiveIcon": {
