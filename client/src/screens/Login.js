@@ -34,6 +34,7 @@ export default function Login(props) {
       mobile: log.mobile,
       password: log.password,
     };
+
     axios({
       method: "post",
       url: `${config.URI}/register/users`,

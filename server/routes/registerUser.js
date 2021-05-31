@@ -32,6 +32,7 @@ router.route("/").get((req, res) => {
 
 router.route("/users").post((req, res) => {
   const { mobile, password } = req.body;
+  // console.log("Got values./");
   if (!mobile || !password) return res.send();
 
   User.find({ mobile, password })
