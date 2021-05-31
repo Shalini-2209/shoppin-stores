@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { ActivityIndicator, Clipboard, Alert } from "react-native";
+// import { ActivityIndicator,  Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -11,6 +11,7 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  Dimensions,
   Text,
   TouchableOpacity,
   Button,
@@ -89,107 +90,113 @@ export default function ProfileScreen({ navigation }) {
 
       {profile.length ? (
         <ScrollView style={{ backgroundColor: "white" }}>
-          <View style={styles.containerOne}>
-            {profile.map((item) => (
-              <View key={item._id}>
-                <View
-                  style={{ justifyContent: "center", alignItems: "center" }}
-                >
-                  <Image source={{ uri: item.logo }} style={styles.proPic} />
-                </View>
-
-                {/* companyName */}
-                <View style={styles.info}>
-                  <MaterialCommunityIcons
-                    name="store-outline"
-                    size={24}
-                    color="#db7093"
-                  />
-
-                  <Text style={{ paddingTop: 5 }}>
-                    {" "}
-                    {"  "}
-                    {item.companyName}
-                  </Text>
-                </View>
-                {/* slogan */}
-                <View style={styles.info}>
-                  <MaterialCommunityIcons
-                    name="arrow-right-bold-box"
-                    size={24}
-                    color="#db7093"
-                  />
-
-                  <Text style={{ paddingTop: 5 }}>
-                    {" "}
-                    {"  "}
-                    {item.slogan}
-                  </Text>
-                </View>
-
-                {/* mobile */}
-                <View style={styles.info}>
-                  <MaterialCommunityIcons
-                    name="whatsapp"
-                    size={24}
-                    color="#db7093"
-                  />
-
-                  <Text style={{ paddingTop: 5 }}>
-                    {" "}
-                    {"  "}
-                    {item.mobile}
-                  </Text>
-                </View>
-
-                {/* appLink */}
-                <View style={styles.info}>
-                  <MaterialCommunityIcons
-                    name="shield-link-variant"
-                    size={24}
-                    color="#db7093"
-                  />
-                  <Text style={{ paddingTop: 5 }}>
-                    {" "}
-                    {"  "}
-                    {item.appLink}
-                  </Text>
-                </View>
-              </View>
-            ))}
-          </View>
-
-          <View style={styles.containerTwo}>
-            {posts.map((item) => (
-              <Card key={item._id}>
-                <Card.Cover source={{ uri: item.image }} style={styles.img} />
-                <Card.Content style={{ flexDirection: "row" }}>
-                  <Paragraph style={{ paddingTop: 5 }}>
-                    Rs. {item.price}
-                  </Paragraph>
-                  <TouchableOpacity
-                    style={styles.icon}
-                    onPress={() => copyProductId(`${item._id}`)}
+          <View style={{ flex: 1 }}>
+            <View style={styles.containerOne}>
+              {profile.map((item) => (
+                <View key={item._id}>
+                  <View
+                    style={{ justifyContent: "center", alignItems: "center" }}
                   >
+                    <Image source={{ uri: item.logo }} style={styles.proPic} />
+                  </View>
+
+                  {/* companyName */}
+                  <View style={styles.info}>
                     <MaterialCommunityIcons
-                      name="content-copy"
+                      name="store-outline"
                       size={24}
-                      color="black"
+                      color="#db7093"
                     />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.deleteIcon}
-                    onPress={() => deletePost(item._id)}
-                  >
+
+                    <Text style={{ paddingTop: 5 }}>
+                      {" "}
+                      {"  "}
+                      {item.companyName}
+                    </Text>
+                  </View>
+                  {/* slogan */}
+                  <View style={styles.info}>
                     <MaterialCommunityIcons
-                      name="delete"
+                      name="arrow-right-bold-box"
                       size={24}
-                      color="black"
+                      color="#db7093"
                     />
-                  </TouchableOpacity>
-                </Card.Content>
-              </Card>
-            ))}
+
+                    <Text style={{ paddingTop: 5 }}>
+                      {" "}
+                      {"  "}
+                      {item.slogan}
+                    </Text>
+                  </View>
+
+                  {/* mobile */}
+                  <View style={styles.info}>
+                    <MaterialCommunityIcons
+                      name="whatsapp"
+                      size={24}
+                      color="#db7093"
+                    />
+
+                    <Text style={{ paddingTop: 5 }}>
+                      {" "}
+                      {"  "}
+                      {item.mobile}
+                    </Text>
+                  </View>
+
+                  {/* appLink */}
+                  <View style={styles.info}>
+                    <MaterialCommunityIcons
+                      name="shield-link-variant"
+                      size={24}
+                      color="#db7093"
+                    />
+                    <Text style={{ paddingTop: 5 }}>
+                      {" "}
+                      {"  "}
+                      {item.appLink}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+
+            <View style={styles.containerTwo}>
+              {posts.map((item) => (
+                <View style={styles.img} key={item._id}>
+                  <View style={{ flex: 1 }}>
+                    <Card>
+                      <Card.Cover source={{ uri: item.image }} />
+                      <Card.Content style={{ flexDirection: "row" }}>
+                        <Paragraph style={{ paddingTop: 5 }}>
+                          Rs. {item.price}
+                        </Paragraph>
+                        <TouchableOpacity
+                          style={styles.icon}
+                          onPress={() => copyProductId(`${item._id}`)}
+                        >
+                          <MaterialCommunityIcons
+                            name="content-copy"
+                            size={24}
+                            color="black"
+                          />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          style={styles.deleteIcon}
+                          onPress={() => deletePost(item._id)}
+                        >
+                          <MaterialCommunityIcons
+                            name="delete"
+                            size={24}
+                            color="black"
+                          />
+                        </TouchableOpacity>
+                      </Card.Content>
+                    </Card>
+                  </View>
+                </View>
+              ))}
+            </View>
           </View>
         </ScrollView>
       ) : (
@@ -201,22 +208,24 @@ export default function ProfileScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   containerOne: {
-    flex: 1,
-    paddingTop: 45,
+    flexDirection: "row",
+    height: "30%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   containerTwo: {
-    flex: 1,
+    // marginTop: "10%",
+    height: "40%",
     flexDirection: "row",
-    paddingTop: 45,
-    paddingLeft: 3,
     flexWrap: "wrap",
   },
 
   proPic: {
     width: 100,
     height: 100,
-    marginBottom: 5,
     borderRadius: 50,
+    borderWidth: 3,
+    borderColor: "#db7093",
   },
 
   icon: {
@@ -243,7 +252,9 @@ const styles = StyleSheet.create({
   },
 
   img: {
-    resizeMode: "contain",
-    width: "auto",
+    // resizeMode: "contain",
+    width: "50%",
+    height: "70%",
+    padding: 5,
   },
 });
