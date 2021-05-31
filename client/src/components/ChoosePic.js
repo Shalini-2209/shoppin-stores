@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Button, Image, View, Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import firebase from "../database/Firebase";
+import firebase from "./database/Firebase";
 import "firebase/storage";
 import Constants from "expo-constants";
 
@@ -14,9 +14,8 @@ function ProductImg(props) {
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
-        const {
-          status,
-        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== "granted") {
           alert("Sorry, we need camera roll permissions to make this work!");
         }
@@ -71,7 +70,7 @@ function ProductImg(props) {
         <View style={{ flexDirection: "row" }}>
           <Image
             source={{ uri: image }}
-            style={{ width: 200, height: 200 }}
+            style={{ width: 300, height: 200, marginTop: 25 }}
             onClick={() => setImage(dummyImg)}
           />
           <MaterialCommunityIcons
