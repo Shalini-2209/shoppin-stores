@@ -2,13 +2,13 @@
   "expo": {
     "userInterfaceStyle": "dark",
     "name": "Insta Stores",
-    "slug": "client",
+    "slug": "insta-stores",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "client/assets/icon.png",
 
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "client/assets/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -24,12 +24,12 @@
       "versionCode": 3,
       "userInterfaceStyle": "dark",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png"
+        "foregroundImage": "./assets/icon.png"
       }
     },
 
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     }
   }
 }
