@@ -71,7 +71,7 @@ export default function Login(props) {
           <TextInput
             style={styles.textInput}
             maxLength={20}
-            keyboardType="phone-pad"
+            keyboardType="numeric"
             value={log.mobile}
           />
           <TextInput
