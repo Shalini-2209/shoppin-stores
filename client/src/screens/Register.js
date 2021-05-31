@@ -60,6 +60,7 @@ export default function Register() {
         maxLength={20}
         style={styles.textInput}
         value={register.mobile}
+        keyboardType="numeric"
         placeholder="Mobile"
         onChangeText={(text) => setRegister({ ...register, mobile: text })}
       />

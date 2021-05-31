@@ -4,6 +4,7 @@ import {
   Text,
   View,
   TextInput,
+  ActivityIndicator,
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
@@ -36,7 +37,6 @@ export default function Login(props) {
       mobile: log.mobile,
       password: log.password,
     };
-
     setForm(false);
     setLoad(true);
 
@@ -73,11 +73,7 @@ export default function Login(props) {
             style={styles.textInput}
             maxLength={20}
             value={log.mobile}
-            keyboardType="phone-pad"
-            placeholder="Mobile"
-            onChangeText={(text) => setLog({ ...log, mobile: text })}
           />
-
           <TextInput
             maxLength={20}
             style={styles.textInput}
@@ -95,6 +91,12 @@ export default function Login(props) {
           >
             <Text style={styles.saveButtonText}>Log me in!</Text>
           </TouchableOpacity>
+        </View>
+      )}
+
+      {load && (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" color="#db7093" />
         </View>
       )}
     </View>
@@ -129,6 +131,12 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
     marginTop: 20,
+  },
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
   },
   saveButtonText: {
     color: "#db7093",
