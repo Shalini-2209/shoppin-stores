@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 // import { ActivityIndicator,  Alert } from "react-native";
+import Clipboard from "@react-native-community/clipboard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";

@@ -58,7 +58,7 @@ export default function ExploreScreen({ navigation }) {
   return (
     <>
       <View>
-        <TopBar name="Feed" />
+        <TopBar name="Explore" />
       </View>
       <Searchbar
         placeholder="Search"

@@ -71,8 +71,10 @@ export default function Login(props) {
           <TextInput
             style={styles.textInput}
             maxLength={20}
-            keyboardType="numeric"
+            placeholder="Mobile number"
+            keyboardType="number-pad"
             value={log.mobile}
+            onChangeText={(text) => setLog({ ...log, mobile: text })}
           />
           <TextInput
             maxLength={20}

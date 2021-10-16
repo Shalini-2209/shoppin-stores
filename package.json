@@ -16,6 +16,6 @@
   "dependencies": {
     "expo": "^41.0.1",
     "mongoose": "^5.11.9",
-    "react-native": "^0.63.4"
+    "react-native": "^0.66.1"
   }
 }
