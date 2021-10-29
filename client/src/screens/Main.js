@@ -10,6 +10,11 @@ export default function Main({ navigation }) {
   const [log, setLog] = useState(true);
   // const [header, setHeader] = useState(true);
 
+  function onRegisterSuccess() {
+    setReg(false);
+    setLog(true);
+  }
+
   return (
     <View style={styles.container}>
       <Header />
@@ -35,7 +40,7 @@ export default function Main({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {reg && <Register />}
+      {reg && <Register onRegisterSuccess={onRegisterSuccess} />}
       {log && <Login navigation={navigation} />}
     </View>
   );

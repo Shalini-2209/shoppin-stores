@@ -61,11 +61,11 @@ export default function Login(props) {
 
   return (
     <View style={styles.container}>
-      {load && (
+      {/* {load && (
         <View style={styles.loading}>
           <ActivityIndicator size="large" color="#db7093" />
         </View>
-      )}
+      )} */}
       {form && (
         <View>
           <TextInput

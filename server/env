@@ -1,0 +1,2 @@
+MONGO_URL = mongodb+srv://Shalu:1234@cluster0.ffpc1.mongodb.net/Cluster0?retryWrites=true&w=majority
+PORT = 3001

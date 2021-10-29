@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import config from "../../config";
-export default function Register() {
+export default function Register({ onRegisterSuccess }) {
   const initialState = {
     userName: "",
     mobile: "",
@@ -37,6 +37,7 @@ export default function Register() {
     })
       .then(() => {
         setRegister(initialState);
+        onRegisterSuccess();
         console.log("Welcome new user!");
       })
       .catch(() => {
