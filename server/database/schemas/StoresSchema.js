@@ -4,6 +4,7 @@ const schema = new mongoose.Schema({
   companyName: { type: String, required: true },
   mobile: { type: Number, required: true },
   slogan: { type: String, required: true },
+  locality: { type: String, required: true },
   category: { type: String },
   logo: {
     type: String,
