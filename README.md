@@ -7,7 +7,7 @@
 Shoppin stores is a cloud-enabled, mobile-ready, online-storage compatible,
 social media platform for online sellers. Built using,
 
-- React Js
+- React Native 
 - Node Js, Express Js
 - MongoDb Cloud, Firebase storage 
 
