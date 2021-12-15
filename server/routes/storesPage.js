@@ -35,6 +35,17 @@ router.route("/stores:val").get((req, res) => {
     });
 });
 
+router.route("/stores").get((req, res) => {
+  // const companyName = req.params.val;
+  Stores.find()
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log("Error" + err);
+    });
+});
+
 router.route("/:phone").get((req, res) => {
   const mobile = parseInt(req.params.phone);
   Stores.find({ mobile })
