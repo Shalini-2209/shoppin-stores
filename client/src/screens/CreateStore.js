@@ -26,6 +26,7 @@ export default function NewProfile() {
   const initialState = {
     name: "",
     slogan: "",
+    locality: "",
     category: "",
     logo: "",
     appLink: "",
@@ -40,6 +41,7 @@ export default function NewProfile() {
     const payload = {
       companyName: details.name,
       slogan: details.slogan,
+      locality: details.locality,
       category: details.category,
       logo: details.logo,
       appLink: details.appLink,
@@ -56,7 +58,7 @@ export default function NewProfile() {
         setDetails(initialState);
       })
       .catch(() => {
-        console.log("Internal server error");
+        throw new Error("Internal server error");
       });
   };
 
@@ -89,6 +91,14 @@ export default function NewProfile() {
           value={details.slogan}
           placeholder="Tagline"
           onChangeText={(text) => setDetails({ ...details, slogan: text })}
+        />
+
+        <TextInput
+          maxLength={20}
+          style={styles.textInput}
+          value={details.locality}
+          placeholder="Locality"
+          onChangeText={(text) => setDetails({ ...details, locality: text })}
         />
 
         <TextInput
@@ -148,9 +158,9 @@ const styles = StyleSheet.create({
     borderColor: "#bc8f8f",
     backgroundColor: "#db7093",
     borderRadius: 30,
-    padding: 15,
+    padding: 10,
     alignItems: "center",
-    marginTop: 20,
+    marginVertical: 20,
   },
   saveButtonText: {
     color: "#FFFFFF",
