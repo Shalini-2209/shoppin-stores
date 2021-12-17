@@ -4,7 +4,7 @@ import Clipboard from "@react-native-community/clipboard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Card, Paragraph } from "react-native-paper";
+import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
 import config from "../../config";
 import {
@@ -15,7 +15,7 @@ import {
   Dimensions,
   Text,
   TouchableOpacity,
-  Button,
+  // Button,
 } from "react-native";
 import TopBar from "../components/TopBar";
 import NewProfile from "./CreateStore";
@@ -85,9 +85,7 @@ export default function ProfileScreen({ navigation }) {
 
   return (
     <>
-      <View>
-        <TopBar name="Profile" />
-      </View>
+      <TopBar name="Profile" />
 
       {profile.length ? (
         <ScrollView style={{ flexGrow: 1, backgroundColor: "white" }}>
@@ -167,37 +165,36 @@ export default function ProfileScreen({ navigation }) {
 
           <View style={styles.containerTwo}>
             {posts.map((item) => (
-              <View style={styles.img} key={item._id}>
-                <View style={{ flex: 1 }}>
-                  <Card>
-                    <Card.Cover source={{ uri: item.image }} />
-                    <Card.Content style={{ flexDirection: "row" }}>
-                      <Paragraph style={{ paddingTop: 5 }}>
-                        Rs. {item.price}
-                      </Paragraph>
-                      <TouchableOpacity
-                        style={styles.icon}
-                        onPress={() => copyProductId(`${item._id}`)}
-                      >
-                        <MaterialCommunityIcons
-                          name="content-copy"
-                          size={24}
-                          color="black"
-                        />
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={styles.deleteIcon}
-                        onPress={() => deletePost(item._id)}
-                      >
-                        <MaterialCommunityIcons
-                          name="delete"
-                          size={24}
-                          color="black"
-                        />
-                      </TouchableOpacity>
-                    </Card.Content>
-                  </Card>
-                </View>
+              <View style={{ width: "50%" }} key={item}>
+                <Card>
+                  <Card.Cover source={{ uri: item.image }} />
+
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      flexWrap: "wrap",
+                      margin: 2,
+                    }}
+                  >
+                    <Paragraph style={{ width: "50%" }}>
+                      {" "}
+                      Rs. {item.price}
+                    </Paragraph>
+
+                    <MaterialCommunityIcons
+                      name="content-copy"
+                      size={24}
+                      color="black"
+                      onPress={() => copyProductId(`${item._id}`)}
+                    />
+                    <MaterialCommunityIcons
+                      name="delete"
+                      size={24}
+                      color="black"
+                      onPress={() => deletePost(item._id)}
+                    />
+                  </View>
+                </Card>
               </View>
             ))}
           </View>
@@ -212,15 +209,15 @@ export default function ProfileScreen({ navigation }) {
 const styles = StyleSheet.create({
   containerOne: {
     flexDirection: "row",
-    height: "30%",
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: "5%",
   },
   containerTwo: {
-    // marginTop: "10%",
-    height: "40%",
+    flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
+    alignItems: "flex-start",
   },
 
   proPic: {
