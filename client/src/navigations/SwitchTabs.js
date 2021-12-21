@@ -6,6 +6,7 @@ import Content from "../screens/Content";
 import Post from "../screens/Post";
 import ProfileScreen from "../screens/Profile";
 import ExploreScreen from "../screens/Explore";
+import List from "../screens/Localities";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -17,11 +18,22 @@ function MyTabs() {
       barStyle={{ backgroundColor: "black" }}
       labelStyle={{ fontSize: 12 }}
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Feed"
         component={Content}
         options={{
           tabBarLabel: "Home",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+        }}
+      /> */}
+
+      <Tab.Screen
+        name="List"
+        component={List}
+        options={{
+          tabBarLabel: "List",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
