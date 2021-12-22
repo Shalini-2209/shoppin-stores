@@ -18,7 +18,7 @@ export default function Post({ navigation }) {
 
   const [product, setProduct] = useState(initialState);
   const [phone, setPhone] = useState("");
-  const [store, setStore] = useState("");
+  const [store, setStore] = useState(null);
   const [posted, setPosted] = useState(false);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function Post({ navigation }) {
       .then((res) => {
         console.log("Store retrieved!");
         const data = res.data;
-        setStore(data[0].companyName);
+        setStore(data);
       })
       .catch(() => {
         console.log("Error in retriving store..");
@@ -49,7 +49,8 @@ export default function Post({ navigation }) {
       price: product.price,
       image: product.image,
       mobile: phone,
-      store: store,
+      store: store[0].companyName,
+      locality: store[0].locality,
     };
     axios({
       url: `${config.URI}/posts/upload`,

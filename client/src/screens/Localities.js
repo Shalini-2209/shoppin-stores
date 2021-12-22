@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -7,23 +7,10 @@ import {
   Text,
   StatusBar,
 } from "react-native";
+import axios from "axios";
+import config from "../../config";
 import TopBar from "../components/TopBar";
 import Content from "./Content";
-
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
-];
 
 const Item = ({ title, setShowFeed, setLocality }) => (
   <View style={styles.item}>
@@ -40,11 +27,34 @@ const Item = ({ title, setShowFeed, setLocality }) => (
 );
 
 const List = () => {
+  // list of available locality
+  const [list, setList] = useState([]);
+
   const [showFeed, setShowFeed] = useState(false);
+
+  // filter by locality chosen
   const [locality, setLocality] = useState("");
+
+  useEffect(() => {
+    const fetchLocalities = () => {
+      axios({
+        url: `${config.URI}/profile/stores`,
+      })
+        .then((res) => {
+          const data = res.data;
+          setList(data);
+        })
+        .catch((e) => {
+          throw new error(e);
+        });
+    };
+
+    fetchLocalities();
+  }, []);
+
   const renderItem = ({ item }) => (
     <Item
-      title={item.title}
+      title={item.locality}
       setShowFeed={setShowFeed}
       setLocality={setLocality}
     />
@@ -54,11 +64,13 @@ const List = () => {
       {!showFeed ? (
         <SafeAreaView style={styles.container}>
           <TopBar name="Available localities" />
-          <FlatList
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />
+          {list && (
+            <FlatList
+              data={list}
+              renderItem={renderItem}
+              keyExtractor={(item) => item._id}
+            />
+          )}
         </SafeAreaView>
       ) : (
         <Content locality={locality} />

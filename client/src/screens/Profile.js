@@ -40,7 +40,7 @@ export default function ProfileScreen({ navigation }) {
         setProfile(data);
       })
       .catch(() => {
-        console.log("Error in retriving data..");
+        console.error("Error in retriving data..");
       });
   };
 
@@ -49,7 +49,6 @@ export default function ProfileScreen({ navigation }) {
       url: `${config.URI}/posts/users${num}`,
     })
       .then((res) => {
-        console.log("Posts has been loaded!");
         const data = res.data;
         setPosts(data);
       })

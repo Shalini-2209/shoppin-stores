@@ -19,7 +19,6 @@ import Store from "./Store";
 export const FeedContext = React.createContext();
 
 export default function Content({ locality }) {
-
   const [content, setContent] = useState([]);
   const [temp, setTemp] = useState("");
   const [open, setOpen] = useState(false);
@@ -31,14 +30,14 @@ export default function Content({ locality }) {
   }
 
   // filter by chosen locality
-  
+
   const getData = () => {
     axios({
-      url: `${config.URI}/posts/`,
+      url: `${config.URI}/posts/${locality}`,
     })
       .then((res) => {
-        console.log("Check out data");
         const data = res.data;
+        // console.log({ data });
         setContent(data);
       })
       .catch(() => {
