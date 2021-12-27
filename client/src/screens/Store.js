@@ -20,6 +20,10 @@ export default function Store(props) {
   useEffect(() => {
     getInfo();
     getPosts();
+    return () => {
+      setProfile([]);
+      setPosts([]);
+    };
   }, []);
 
   const initializeWhatsApp = (id) => {
@@ -46,6 +50,7 @@ export default function Store(props) {
       .then((res) => {
         console.log("Check out data");
         const data = res.data;
+        console.log(data);
         if (data.length > 0) {
           setProfile(data);
         }
@@ -57,11 +62,12 @@ export default function Store(props) {
 
   const getPosts = () => {
     axios({
-      url: `${config.URI}/posts/store${props.companyName}`,
+      url: `${config.URI}/posts/${props.companyName}`,
     })
       .then((res) => {
         console.log("Posts has been loaded!");
         const data = res.data;
+        console.log(data);
         setPosts(data);
       })
       .catch(() => {

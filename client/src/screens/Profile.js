@@ -46,7 +46,7 @@ export default function ProfileScreen({ navigation }) {
 
   const getPosts = (num) => {
     axios({
-      url: `${config.URI}/posts/users${num}`,
+      url: `${config.URI}/posts/users/${num}`,
     })
       .then((res) => {
         const data = res.data;

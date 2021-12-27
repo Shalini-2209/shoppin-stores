@@ -9,7 +9,6 @@ import { Card } from "react-native-paper";
 import axios from "axios";
 
 export default function ExploreScreen({ navigation }) {
-  const [searchQuery, setSearchQuery] = React.useState("");
   const [storesList, setStoresList] = React.useState([]);
   const [filteredList, setFilteredList] = React.useState([]);
   const [open, setOpen] = React.useState(false);
@@ -17,8 +16,6 @@ export default function ExploreScreen({ navigation }) {
 
   const onChangeSearch = (query) => {
     setOpen(false);
-    // setSearchQuery(query);
-    // setStoresList([]);
     let tempStores = storesList.filter(
       (item) =>
         item.companyName.toLowerCase().search(query.toLowerCase()) !== -1
@@ -59,6 +56,7 @@ export default function ExploreScreen({ navigation }) {
 
   const openProfile = (value) => {
     setOpen(true);
+    setFilteredList([]);
     setTemp(value);
   };
 
