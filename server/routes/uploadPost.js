@@ -28,6 +28,19 @@ router.route("/").get((req, res) => {
     });
 });
 
+router.route("/:val").get((req, res) => {
+  const value = req.params.val;
+  Post.find({ $or: [{ store: value }, { locality: value }] })
+    .sort({ date: -1 })
+    .then((data) => {
+      console.log("Data retrieved successfully ");
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log("error: ", error);
+    });
+});
+
 router.route("/store:val").get((req, res) => {
   const store = req.params.val;
   Post.find({ store })
@@ -52,7 +65,7 @@ router.route("/delete:id").get((req, res) => {
     });
 });
 
-router.route("/users:phone").get((req, res) => {
+router.route("/users/:phone").get((req, res) => {
   const mobile = parseInt(req.params.phone);
   Post.find({ mobile })
     .then((data) => {

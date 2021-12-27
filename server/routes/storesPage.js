@@ -24,8 +24,8 @@ router
   });
 
 router.route("/stores:val").get((req, res) => {
-  const companyName = req.params.val;
-  Stores.find({ companyName })
+  const value = req.params.val;
+  Stores.find({ $or: [{ companyName: value }, { locality: value }] })
 
     .then((data) => {
       res.json(data);
