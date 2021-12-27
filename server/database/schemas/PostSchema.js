@@ -6,6 +6,7 @@ const schema = new mongoose.Schema({
   price: { type: Number, required: true },
   mobile: { type: Number },
   store: { type: String, required: true },
+  locality: { type: String, required: true },
 
   date: {
     type: Date,
