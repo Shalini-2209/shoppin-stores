@@ -62,16 +62,18 @@ const List = () => {
   return (
     <>
       {!showFeed ? (
-        <SafeAreaView style={styles.container}>
+        <>
           <TopBar name="Available localities" />
-          {list && (
-            <FlatList
-              data={list}
-              renderItem={renderItem}
-              keyExtractor={(item) => item._id}
-            />
-          )}
-        </SafeAreaView>
+          <SafeAreaView style={styles.container}>
+            {list && (
+              <FlatList
+                data={list}
+                renderItem={renderItem}
+                keyExtractor={(item) => item._id}
+              />
+            )}
+          </SafeAreaView>
+        </>
       ) : (
         <Content locality={locality} />
       )}
