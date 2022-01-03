@@ -16,13 +16,20 @@ export default function TopBar(props) {
   return (
     <View style={{ height: "auto" }}>
       <View style={styles.container}>
-        <MaterialCommunityIcons name="menu" size={26} color="#db7093" />
+        {props.back !== undefined && (
+          <MaterialCommunityIcons
+            name="arrow-left"
+            onPress={props.back}
+            size={26}
+            color="#db7093"
+          />
+        )}
 
         <Text style={styles.textInput}> {props.name}</Text>
 
         <TouchableOpacity onPress={logMeOut} style={styles.button}>
           <MaterialCommunityIcons name="logout" size={20} color="#db7093" />
-          <Text style={{ color: "#e28ca8" }}>Log out</Text>
+          {/* <Text style={{ color: "#e28ca8" }}>Log out</Text> */}
         </TouchableOpacity>
       </View>
     </View>

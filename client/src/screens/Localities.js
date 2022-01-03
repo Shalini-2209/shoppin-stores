@@ -32,6 +32,11 @@ const List = () => {
 
   const [showFeed, setShowFeed] = useState(false);
 
+  const handleShowFeed = () => {
+    console.log("Back");
+    setShowFeed(false);
+  };
+
   // filter by locality chosen
   const [locality, setLocality] = useState("");
 
@@ -75,7 +80,7 @@ const List = () => {
           </SafeAreaView>
         </>
       ) : (
-        <Content locality={locality} />
+        <Content handleShowFeed={handleShowFeed} locality={locality} />
       )}
     </>
   );

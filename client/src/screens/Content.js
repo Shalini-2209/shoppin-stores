@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import axios from "axios";
-import { Card } from "react-native-paper";
+import { Button, Card } from "react-native-paper";
 import {
   View,
   Image,
@@ -18,7 +18,7 @@ import Store from "./Store";
 
 export const FeedContext = React.createContext();
 
-export default function Content({ locality }) {
+export default function Content({ locality, handleShowFeed }) {
   const [content, setContent] = useState([]);
   const [temp, setTemp] = useState("");
   const [open, setOpen] = useState(false);
@@ -72,7 +72,7 @@ export default function Content({ locality }) {
   return (
     <>
       <View>
-        <TopBar name="Feed" />
+        <TopBar name="Feed" back={handleShowFeed} />
       </View>
 
       {load && (
@@ -80,7 +80,6 @@ export default function Content({ locality }) {
           <ActivityIndicator size="large" color="#db7093" />
         </View>
       )}
-
       {open && (
         <>
           <TouchableOpacity
